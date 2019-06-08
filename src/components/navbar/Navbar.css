@@ -1,0 +1,19 @@
+.navbar {
+  padding: 0.5em 2em;
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  display: flex;
+  align-items: center;
+}
+
+.navbar-icon {
+  color: var(--color-secondary);
+}
+
+.navbar-title {
+  margin: 0 0.5em;
+  font-size: 2em;
+  font-weight: 300;
+  color: var(--color-secondary);
+  display: inline;
+}

@@ -1,13 +1,13 @@
 import React from 'react';
+
 import './App.css';
+import {Navbar} from './navbar/Navbar';
 
 function App() {
   return (
     <div className="app">
-      <header className="app-header">
-      </header>
+      < Navbar />
       <section className="app-main" role="main">
-
       </section>
     </div>
   );
