@@ -6,3 +6,11 @@
   --color-accent: #ED254E;
 }
 
+.app-main {
+  margin: 0 auto;
+}
+
+.product-list {
+  list-style-type: none;
+}
+

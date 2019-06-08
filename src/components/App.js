@@ -8,6 +8,8 @@ function App() {
     <div className="app">
       < Navbar />
       <section className="app-main" role="main">
+        <ul className="product-list">
+        </ul>
       </section>
     </div>
   );
