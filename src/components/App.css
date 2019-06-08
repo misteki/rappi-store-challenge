@@ -1,0 +1,19 @@
+.app {
+  --color-dark: #2B2B2B;
+  --color-light: #FCFCFC;
+  --color-primary: #F9DC5C;
+  --color-secondary: #33658A;
+  --color-accent: #ED254E;
+}
+
+.app-main {
+  max-width: 1000px;
+  padding: 24px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.product-list {
+  list-style-type: none;
+}
+
