@@ -33,9 +33,14 @@ class Store extends React.Component {
     const { products, categories } = this.state;
 
     return (
-      <main className="app-main">
-        <Sidebar categories={categories} />
-        <Products />
+      <main className="store">
+        <aside className="sidebar">
+          <Sidebar categories={categories} />
+        </aside>
+
+        <section className="products" role="main">
+          <Products products={products} />
+        </section>
       </main>
     );
   }

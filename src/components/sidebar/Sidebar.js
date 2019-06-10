@@ -9,7 +9,7 @@ const Sidebar = (props) => {
   const categoriesList = levelCategories => (
     <ul className="category-list">
       {levelCategories.map(category => (
-        <React.Fragment>
+        <React.Fragment key={category.id}>
           <li className="category-list-item">
             {category.name}
           </li>
@@ -22,9 +22,9 @@ const Sidebar = (props) => {
   );
 
   return (
-    <aside className="sidebar">
+    <React.Fragment>
       {categoriesList(categories)}
-    </aside>
+    </React.Fragment>
   );
 };
 
