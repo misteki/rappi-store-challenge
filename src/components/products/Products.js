@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Sidebar = () => (
+const Products = () => (
   <section role="main">
     <ul className="product-list">
       <li> Placeholder content </li>
@@ -9,4 +9,4 @@ const Sidebar = () => (
   </section>
 );
 
-export default Sidebar;
+export default Products;

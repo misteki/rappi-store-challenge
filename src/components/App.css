@@ -1,5 +1,6 @@
 .app {
-  --color-dark: #2B2B2B;
+  --color-dark: #222222;
+  --color-gray: #aaaaaa;
   --color-light: #FCFCFC;
   --color-primary: #F9DC5C;
   --color-secondary: #33658A;
@@ -14,6 +15,5 @@
 }
 
 .product-list {
-  list-style-type: none;
 }
 
