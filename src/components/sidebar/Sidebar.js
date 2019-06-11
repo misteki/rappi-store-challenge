@@ -22,9 +22,9 @@ const Sidebar = (props) => {
   );
 
   return (
-    <React.Fragment>
+    <div className="list-container">
       {categoriesList(categories)}
-    </React.Fragment>
+    </div>
   );
 };
 

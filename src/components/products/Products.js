@@ -15,7 +15,9 @@ const Products = (props) => {
               <h2 className="product-name">{product.name}</h2>
               <h3 className="product-price">{product.price}</h3>
               <div className="product-details">
-                <p className="product-availability">{product.available ? 'Available' : 'Not available'}</p>
+                <p className={`product-availability ${product.available ? '' : 'not-available'}`}>
+                  {product.available ? 'Available' : 'Not available'}
+                </p>
                 <p className="product-quantity">{`${product.quantity} in stock`}</p>
               </div>
             </li>
