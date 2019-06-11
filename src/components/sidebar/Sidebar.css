@@ -1,15 +1,25 @@
-.list-container {
-  padding: 1em 2em 1em 1em;
+.categories-title {
+  background-color: var(--color-primary);
+  margin: 0;
+  padding: 0.3em 2em 0.3em 0.5em;
+  text-align: left;
+  font-weight: 400;
+  margin: 0.5em 0;
+  font-size: 1.2em;
 }
 
 .category-list {
   margin: 0;
-  padding: 0 0 0 1em;
+  padding-inline-start: 1em;
   list-style-type: none;
   font-size: 12px;
 }
 
-.category-list:not(:first-child) {
+.category-list.first-level {
+  padding: 0 2em;
+}
+
+.category-list.sublevel {
   border-left: 1px solid var(--color-gray);
 }
 
@@ -28,7 +38,7 @@
 }
 
 .category-list-item:not(:last-child) {
-  margin-bottom: 0.7em;
+  margin-bottom: 0.5em;
 }
 
 .category-list .selected {

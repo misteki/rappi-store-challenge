@@ -6,8 +6,8 @@ import './Sidebar.css';
 const Sidebar = (props) => {
   const { categories, onCategoryChange, selectedCategory } = props;
 
-  const categoriesList = levelCategories => (
-    <ul className="category-list">
+  const categoriesList = (levelCategories, isParent) => (
+    <ul className={`category-list ${isParent ? 'first-level' : 'sublevel'}`}>
       {levelCategories.map(category => (
         <React.Fragment key={category.id}>
           <li
@@ -18,7 +18,7 @@ const Sidebar = (props) => {
             {category.name}
           </li>
           {
-            category.sublevels && categoriesList(category.sublevels)
+            category.sublevels && categoriesList(category.sublevels, false)
           }
         </React.Fragment>
       ))}
@@ -27,7 +27,8 @@ const Sidebar = (props) => {
 
   return (
     <div className="list-container">
-      {categoriesList(categories)}
+      <h3 className="categories-title"> Categories </h3>
+      {categoriesList(categories, true)}
     </div>
   );
 };
