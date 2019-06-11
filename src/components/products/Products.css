@@ -51,6 +51,12 @@
   font-weight: lighter;
 }
 
+.no-products {
+  text-align: center;
+  margin: 2em 0;
+  width: 100%;
+}
+
 @media (max-width: 1023px) {  
   .product-list-item {
     flex: 1 0 260px;

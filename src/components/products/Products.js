@@ -1,16 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Products.css';
 
 const Products = (props) => {
-  const { products } = props;
-  const listedProducts = products.slice(0, 9);
+  const { products, selectedCategory } = props;
+
+  const getSubcategoriesIDs = (category) => {
+    let ids = [];
+    if (category.sublevels) {
+      ids = category.sublevels.map(subcategory => getSubcategoriesIDs(subcategory));
+    }
+    return [category.id, ...ids.flat()];
+  };
+  const selectedCategoriesIDs = selectedCategory ? getSubcategoriesIDs(selectedCategory) : [];
+
+  const filteredProducts = products
+    .filter(product => !selectedCategory || selectedCategoriesIDs.includes(product.sublevel_id))
+    .slice(0, 9);
 
   return (
     <React.Fragment>
       <ul className="product-list">
         {
-          listedProducts.map(product => (
+          filteredProducts.map(product => (
             <li className="product-list-item" key={product.id}>
               <h2 className="product-name">{product.name}</h2>
               <h3 className="product-price">{product.price}</h3>
@@ -23,9 +36,23 @@ const Products = (props) => {
             </li>
           ))
         }
+        {
+          filteredProducts.length === 0
+          && (<h1 className="no-products"> No products found</h1>)
+        }
       </ul>
     </React.Fragment>
   );
+};
+
+Products.propTypes = {
+  products: PropTypes.array,
+  selectedCategory: PropTypes.object,
+};
+
+Products.defaultProps = {
+  products: [],
+  selectedCategory: null,
 };
 
 export default Products;

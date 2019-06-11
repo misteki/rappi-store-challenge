@@ -12,9 +12,12 @@ class Store extends React.Component {
     this.state = {
       products: [],
       categories: [],
+      selectedCategory: null,
     };
+    this.onCategoryChange = this.onCategoryChange.bind(this);
   }
 
+  // Fetch categories and products
   componentDidMount() {
     getProducts().then((products) => {
       this.setState({
@@ -29,17 +32,23 @@ class Store extends React.Component {
     });
   }
 
+  onCategoryChange(category) {
+    this.setState({
+      selectedCategory: category,
+    });
+  }
+
   render() {
-    const { products, categories } = this.state;
+    const { products, categories, selectedCategory } = this.state;
 
     return (
       <main className="store">
         <aside className="sidebar">
-          <Sidebar categories={categories} />
+          <Sidebar categories={categories} onCategoryChange={this.onCategoryChange} selectedCategory={selectedCategory} />
         </aside>
 
         <section className="products" role="main">
-          <Products products={products} />
+          <Products products={products} selectedCategory={selectedCategory} />
         </section>
       </main>
     );

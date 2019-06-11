@@ -15,7 +15,12 @@
 
 .category-list-item {
   color: var(--color-secondary);
-  font-weight: 300;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.category-list-item.selected {
+  font-weight: 900;
 }
 
 .category-list:not(:last-child) {
@@ -23,13 +28,9 @@
 }
 
 .category-list-item:not(:last-child) {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.7em;
 }
 
-.category-list > li {
+.category-list .selected {
   font-weight: bold;
-}
-
-.category-list > ul > li{
-  font-weight: normal;
 }

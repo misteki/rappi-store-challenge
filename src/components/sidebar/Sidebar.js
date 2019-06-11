@@ -4,13 +4,17 @@ import PropTypes from 'prop-types';
 import './Sidebar.css';
 
 const Sidebar = (props) => {
-  const { categories } = props;
+  const { categories, onCategoryChange, selectedCategory } = props;
 
   const categoriesList = levelCategories => (
     <ul className="category-list">
       {levelCategories.map(category => (
         <React.Fragment key={category.id}>
-          <li className="category-list-item">
+          <li
+            role="button"
+            className={selectedCategory && category.id === selectedCategory.id ? 'category-list-item selected' : 'category-list-item'}
+            onClick={() => { onCategoryChange(category); }}
+          >
             {category.name}
           </li>
           {
@@ -29,11 +33,13 @@ const Sidebar = (props) => {
 };
 
 Sidebar.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object),
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onCategoryChange: PropTypes.func.isRequired,
+  selectedCategory: PropTypes.object,
 };
 
 Sidebar.defaultProps = {
-  categories: [],
+  selectedCategory: null,
 };
 
 export default Sidebar;
