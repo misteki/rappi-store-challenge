@@ -27,7 +27,7 @@ const Sidebar = (props) => {
 
   return (
     <div className="list-container">
-      <h3 className="categories-title"> Categories </h3>
+      <h3 className="categories-title"> Categorías </h3>
       {categoriesList(categories, true)}
     </div>
   );
