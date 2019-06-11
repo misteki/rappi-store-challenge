@@ -2,16 +2,12 @@ import React from 'react';
 
 import './App.css';
 import Navbar from './navbar/Navbar';
-import Sidebar from './sidebar/Sidebar';
-import Products from './products/Products';
+import Store from './store/Store';
 
 const App = () => (
   <div className="app">
     <Navbar />
-    <main className="app-main">
-      <Sidebar />
-      <Products />
-    </main>
+    <Store />
   </div>
 );
 
