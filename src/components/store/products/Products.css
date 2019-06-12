@@ -13,7 +13,7 @@
   box-shadow: 0px 2px 3px 0px var(--color-gray);
   border-radius: 4px;
   width: 100%;
-  flex: 0 0 300px;
+  flex: 0 0 260px;
   display: flex;
   flex-direction: column;
 }
@@ -49,6 +49,12 @@
   font-size: 0.9em;
   text-align: end;
   font-weight: lighter;
+}
+
+.no-products {
+  text-align: center;
+  margin: 2em 0;
+  width: 100%;
 }
 
 @media (max-width: 1023px) {  

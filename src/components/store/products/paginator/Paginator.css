@@ -1,0 +1,31 @@
+.paginator-container {
+  margin: 2em 0;
+  display: flex;
+  justify-content: center;
+}
+
+.paginator {
+  font-weight: 400;
+  border: 1px solid var(--color-gray);
+  box-shadow: 0px 2px 3px 0px var(--color-gray);
+  border-radius: 40px;
+  font-size: 1em;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.paginator-button {
+  margin: 0 1em;
+  padding: 0 0.3em;
+}
+
+.paginator-button.selected {
+  font-weight: bolder;
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
+}
+
+.navigation-arrow {
+  cursor: pointer;
+}

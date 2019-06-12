@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Assumptions and considerations
+- Spanish was assumed to be the desired language.
+- A unique ID was not available for each category in the original source data. Change IDs so each category would have a unique one. IDs have been assumed to be only valid if they are numbers bigger than 0 (0 not admitted).
+- When selected a category, filter includes the category itself and all its subcategories.
+- The paginator size ( number of pages it displayed) was not capped due to the fact that there are at most 7 pages with the set page size and the amount of products in the hardcoded data; but it should be! (not implemented to save some time).
+
 ## Available Scripts
 
 In the project directory, you can run:
