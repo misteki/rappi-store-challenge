@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ArrowRight, ArrowLeft } from 'react-feather';
+
+import Paginator from './paginator/Paginator';
 
 import './Products.css';
 
@@ -42,18 +43,7 @@ const Products = (props) => {
           && (<h1 className="no-products"> No products found</h1>)
         }
       </ul>
-      <nav className="paginator-container">
-        <div className="paginator">
-          <ArrowLeft size={16} />
-          <span className="selected"> 1 </span>
-          <span> 2 </span>
-          <span> 3 </span>
-          <span> 4 </span>
-          <span> 5 </span>
-          <ArrowRight size={16} />
-
-        </div>
-      </nav>
+      <Paginator />
     </React.Fragment>
   );
 };
