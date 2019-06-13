@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PlusCircle, CheckCircle } from 'react-feather';
 
 import Paginator from './paginator/Paginator';
 
@@ -9,7 +10,7 @@ const Products = (props) => {
   const pageSize = 9;
 
   const {
-    products, selectedCategory, currentPage, onPageChange,
+    products, selectedProducts, selectedCategory, currentPage, onPageChange, onAddProduct,
   } = props;
 
   const getSubcategoriesIDs = (category) => {
@@ -34,6 +35,15 @@ const Products = (props) => {
         {
           productsInPage.map(product => (
             <li className="product-list-item" key={product.id}>
+              {selectedProducts.includes(product.id)
+                ? <i className="cart-state added" title="Added to your cart"><CheckCircle size={36} /></i>
+                : (
+                  <button type="button" className="cart-state add-to-cart" title="Add to cart" onClick={() => onAddProduct(product)}>
+                    <PlusCircle size={36} />
+                  </button>
+                )
+
+                }
               <h2 className="product-name">{product.name}</h2>
               <h3 className="product-price">{product.price}</h3>
               <div className="product-details">

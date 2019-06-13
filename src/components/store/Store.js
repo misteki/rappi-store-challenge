@@ -4,7 +4,7 @@ import './Store.css';
 import Sidebar from './sidebar/Sidebar';
 import Products from './products/Products';
 
-import { getProducts, getCategories } from '../../services/store-service';
+import { getProducts, getCategories, addToCart } from '../../services/store-service';
 
 class Store extends React.Component {
   constructor(props) {
@@ -12,11 +12,13 @@ class Store extends React.Component {
     this.state = {
       products: [],
       categories: [],
+      cart: [],
       selectedCategory: null,
       currentProductPage: 0,
     };
     this.onCategoryChange = this.onCategoryChange.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
+    this.addProductToCart = this.addProductToCart.bind(this);
   }
 
   // Fetch categories and products
@@ -47,9 +49,20 @@ class Store extends React.Component {
     });
   }
 
+  addProductToCart(product) {
+    addToCart(product).then(() => {
+      const { cart } = this.state;
+      this.setState({
+        cart: [...cart, product],
+      });
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
   render() {
     const {
-      products, categories, selectedCategory, currentProductPage,
+      products, categories, selectedCategory, currentProductPage, cart,
     } = this.state;
 
     return (
@@ -66,8 +79,10 @@ class Store extends React.Component {
           <Products
             products={products}
             selectedCategory={selectedCategory}
+            selectedProducts={cart.map(product => product.id)}
             currentPage={currentProductPage}
             onPageChange={this.onPageChange}
+            onAddProduct={this.addProductToCart}
           />
         </section>
       </main>
