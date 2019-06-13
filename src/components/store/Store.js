@@ -16,10 +16,17 @@ class Store extends React.Component {
       products: [],
       categories: [],
       cart: [],
-      selectedCategory: null,
       currentProductPage: 0,
+      filters: {
+        category: undefined,
+        availability: undefined,
+        minStock: undefined,
+        maxStock: undefined,
+        minPrice: undefined,
+        maxPrice: undefined,
+      },
     };
-    this.onCategoryChange = this.onCategoryChange.bind(this);
+    this.onFilterValueChange = this.onFilterValueChange.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
     this.addProductToCart = this.addProductToCart.bind(this);
   }
@@ -45,10 +52,14 @@ class Store extends React.Component {
     });
   }
 
-  onCategoryChange(category) {
+  onFilterValueChange(filterId, value) {
+    const { filters } = this.state;
     this.setState({
       currentProductPage: 0,
-      selectedCategory: category,
+      filters: {
+        ...filters,
+        [filterId]: value,
+      },
     });
   }
 
@@ -69,10 +80,19 @@ class Store extends React.Component {
 
   render() {
     const {
-      products, categories, selectedCategory, currentProductPage, cart,
+      products, categories, filters, currentProductPage, cart,
     } = this.state;
+    const {
+      category,
+      availability,
+      minStock,
+      maxStock,
+      minPrice,
+      maxPrice,
+    } = filters;
 
     const pageSize = 9;
+
     const getSubcategoriesIDs = (category) => {
       let ids = [];
       if (category.sublevels) {
@@ -80,25 +100,30 @@ class Store extends React.Component {
       }
       return [category.id, ...ids.flat()];
     };
-    const selectedCategoriesIDs = selectedCategory ? getSubcategoriesIDs(selectedCategory) : [];
+    const selectedCategoriesIDs = category ? getSubcategoriesIDs(category) : [];
 
+    // Apply filters
     const filteredProducts = products
-      .filter(product => !selectedCategory || selectedCategoriesIDs.includes(product.sublevel_id));
+      .filter(product => (!category || selectedCategoriesIDs.includes(product.sublevel_id))
+        && (availability === undefined || product.available === availability)
+        && (minStock === undefined || Number.isNaN(minStock) || product.quantity >= minStock)
+        && (maxStock === undefined || Number.isNaN(maxStock) || product.quantity <= maxStock)
+        && (minPrice === undefined || Number.isNaN(minPrice) || product.price >= minPrice)
+        && (maxPrice === undefined || Number.isNaN(maxPrice) || product.price <= maxPrice));
 
     return (
       <main className="store">
         <aside className="sidebar">
           <Sidebar
             categories={categories}
-            onCategoryChange={this.onCategoryChange}
-            selectedCategory={selectedCategory}
+            onFilterValueChange={(filterId, value) => { this.onFilterValueChange(filterId, value); }}
+            filters={filters}
           />
         </aside>
 
         <section className="products" role="main">
           <Products
             products={filteredProducts}
-            selectedCategory={selectedCategory}
             selectedProducts={cart.map(product => product.id)}
             currentPage={currentProductPage}
             onAction={this.addProductToCart}
