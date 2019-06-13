@@ -2,7 +2,8 @@ import React from 'react';
 
 import './Store.css';
 import Sidebar from './sidebar/Sidebar';
-import Products from './products/Products';
+import Products from '../shared/products/Products';
+import Paginator from './paginator/Paginator';
 
 import { getProducts, getCategories, addToCart } from '../../services/store-service';
 
@@ -65,6 +66,19 @@ class Store extends React.Component {
       products, categories, selectedCategory, currentProductPage, cart,
     } = this.state;
 
+    const pageSize = 9;
+    const getSubcategoriesIDs = (category) => {
+      let ids = [];
+      if (category.sublevels) {
+        ids = category.sublevels.map(subcategory => getSubcategoriesIDs(subcategory));
+      }
+      return [category.id, ...ids.flat()];
+    };
+    const selectedCategoriesIDs = selectedCategory ? getSubcategoriesIDs(selectedCategory) : [];
+
+    const filteredProducts = products
+      .filter(product => !selectedCategory || selectedCategoriesIDs.includes(product.sublevel_id));
+
     return (
       <main className="store">
         <aside className="sidebar">
@@ -77,13 +91,21 @@ class Store extends React.Component {
 
         <section className="products" role="main">
           <Products
-            products={products}
+            products={filteredProducts}
             selectedCategory={selectedCategory}
             selectedProducts={cart.map(product => product.id)}
             currentPage={currentProductPage}
-            onPageChange={this.onPageChange}
             onAddProduct={this.addProductToCart}
+            pageSize={pageSize}
           />
+          {products.length > 0 && (
+            <Paginator
+              entries={filteredProducts.length}
+              pageSize={pageSize}
+              currentPage={currentProductPage}
+              onPageChange={this.onPageChange}
+            />
+          )}
         </section>
       </main>
     );

@@ -2,32 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PlusCircle, CheckCircle } from 'react-feather';
 
-import Paginator from './paginator/Paginator';
-
 import './Products.css';
 
 const Products = (props) => {
-  const pageSize = 9;
-
   const {
-    products, selectedProducts, selectedCategory, currentPage, onPageChange, onAddProduct,
+    products, selectedProducts, currentPage, onAddProduct, pageSize,
   } = props;
-
-  const getSubcategoriesIDs = (category) => {
-    let ids = [];
-    if (category.sublevels) {
-      ids = category.sublevels.map(subcategory => getSubcategoriesIDs(subcategory));
-    }
-    return [category.id, ...ids.flat()];
-  };
-  const selectedCategoriesIDs = selectedCategory ? getSubcategoriesIDs(selectedCategory) : [];
-
-  const filteredProducts = products
-    .filter(product => !selectedCategory || selectedCategoriesIDs.includes(product.sublevel_id));
 
   const firstProductInPageIndex = pageSize * currentPage;
   const lastProductInPageIndex = firstProductInPageIndex + pageSize;
-  const productsInPage = filteredProducts.slice(firstProductInPageIndex, lastProductInPageIndex);
+  const productsInPage = products.slice(firstProductInPageIndex, lastProductInPageIndex);
 
   return (
     <React.Fragment>
@@ -56,34 +40,26 @@ const Products = (props) => {
           ))
         }
         {
-          filteredProducts.length === 0
+          products.length === 0
           && (<h1 className="no-products"> No products found</h1>)
         }
       </ul>
-      {filteredProducts.length > 0
-      && (
-      <Paginator
-        entries={filteredProducts.length}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-      />
-      )}
     </React.Fragment>
   );
 };
 
 Products.propTypes = {
-  products: PropTypes.array,
-  selectedCategory: PropTypes.object,
+  products: PropTypes.array.isRequired,
   currentPage: PropTypes.number,
-  onPageChange: PropTypes.func.isRequired,
+  selectedProducts: PropTypes.array,
+  onAddProduct: PropTypes.func.isRequired,
+  pageSize: PropTypes.number,
 };
 
 Products.defaultProps = {
-  products: [],
-  selectedCategory: null,
+  selectedProducts: [],
   currentPage: 0,
+  pageSize: 10,
 };
 
 export default Products;

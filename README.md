@@ -10,6 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Products that are not available can be added to the cart 
 - Products can be removed from the cart only from the Cart view
 - Service method errors are only informed using the console. For UX's sake this should not be the case, but the UI implementation was not explicitly required and thus was not implemented.
+- Considering there's only two distinct views (product list and cart), routing was not added.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
