@@ -63,16 +63,25 @@
   right: 1em;
 }
 
-.cart-state.added {
+.cart-state.confirmed {
   color: var(--color-primary);
 }
 
-.cart-state.add-to-cart {
+.cart-state.add {
   color: var(--color-secondary);
 }
 
-.cart-state.add-to-cart:hover svg{
+.cart-state.add:hover svg{
   fill: var(--color-secondary);
+  stroke: var(--color-light);
+}
+
+.cart-state.remove {
+  color: var(--color-accent);
+}
+
+.cart-state.remove:hover svg{
+  fill: var(--color-accent);
   stroke: var(--color-light);
 }
 

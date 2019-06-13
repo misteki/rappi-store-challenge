@@ -5,7 +5,9 @@ import Sidebar from './sidebar/Sidebar';
 import Products from '../shared/products/Products';
 import Paginator from './paginator/Paginator';
 
-import { getProducts, getCategories, addToCart } from '../../services/store-service';
+import {
+  getProducts, getCategories, addToCart, getCart,
+} from '../../services/store-service';
 
 class Store extends React.Component {
   constructor(props) {
@@ -33,6 +35,12 @@ class Store extends React.Component {
     getCategories().then((categories) => {
       this.setState({
         categories,
+      });
+    });
+
+    getCart().then((cart) => {
+      this.setState({
+        cart,
       });
     });
   }
@@ -95,8 +103,9 @@ class Store extends React.Component {
             selectedCategory={selectedCategory}
             selectedProducts={cart.map(product => product.id)}
             currentPage={currentProductPage}
-            onAddProduct={this.addProductToCart}
+            onAction={this.addProductToCart}
             pageSize={pageSize}
+            actionIcon="add"
           />
           {products.length > 0 && (
             <Paginator

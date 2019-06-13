@@ -11,6 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Products can be removed from the cart only from the Cart view
 - Service method errors are only informed using the console. For UX's sake this should not be the case, but the UI implementation was not explicitly required and thus was not implemented.
 - Considering there's only two distinct views (product list and cart), routing was not added.
+- When fetching local storage fails for any reason, an empty cart is returned and the storage is cleared to avoid future errors. The promises related to this always resolve successfully to save the time from writing error handling code on the consumers, but those should be in there when using actual HTTP calls instead of fetching hardcoded data.
 
 
 ## Available Scripts

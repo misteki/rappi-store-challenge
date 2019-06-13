@@ -1,17 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PlusCircle, CheckCircle } from 'react-feather';
+import { PlusCircle, CheckCircle, XCircle } from 'react-feather';
 
 import './Products.css';
 
 const Products = (props) => {
   const {
-    products, selectedProducts, currentPage, onAddProduct, pageSize,
+    products, selectedProducts, currentPage, onAction, pageSize, actionIcon,
   } = props;
 
   const firstProductInPageIndex = pageSize * currentPage;
   const lastProductInPageIndex = firstProductInPageIndex + pageSize;
   const productsInPage = products.slice(firstProductInPageIndex, lastProductInPageIndex);
+
+  const actionButton = (product) => {
+    const isSelected = selectedProducts && selectedProducts.includes(product.id);
+    return (
+      <React.Fragment>
+        {
+          !selectedProducts || !isSelected
+            ? (
+              <button
+                type="button"
+                className={`cart-state ${actionIcon}`}
+                title="Add to cart"
+                onClick={() => onAction(product)}
+              >
+                {
+              actionIcon === 'add'
+                ? <PlusCircle size={36} />
+                : <XCircle size={36} />
+            }
+              </button>
+            )
+            : (
+              <i className="cart-state confirmed" title="Added to your cart">
+                <CheckCircle size={36} />
+              </i>
+            )
+        }
+      </React.Fragment>
+    );
+  };
 
   return (
     <React.Fragment>
@@ -19,15 +49,9 @@ const Products = (props) => {
         {
           productsInPage.map(product => (
             <li className="product-list-item" key={product.id}>
-              {selectedProducts.includes(product.id)
-                ? <i className="cart-state added" title="Added to your cart"><CheckCircle size={36} /></i>
-                : (
-                  <button type="button" className="cart-state add-to-cart" title="Add to cart" onClick={() => onAddProduct(product)}>
-                    <PlusCircle size={36} />
-                  </button>
-                )
-
-                }
+              {
+                actionButton(product)
+              }
               <h2 className="product-name">{product.name}</h2>
               <h3 className="product-price">{product.price}</h3>
               <div className="product-details">
@@ -52,14 +76,17 @@ Products.propTypes = {
   products: PropTypes.array.isRequired,
   currentPage: PropTypes.number,
   selectedProducts: PropTypes.array,
-  onAddProduct: PropTypes.func.isRequired,
+  onAction: PropTypes.func,
   pageSize: PropTypes.number,
+  actionIcon: PropTypes.oneOf(['add', 'remove']),
 };
 
 Products.defaultProps = {
-  selectedProducts: [],
+  selectedProducts: null,
   currentPage: 0,
-  pageSize: 10,
+  pageSize: Infinity,
+  onAction: null,
+  actionIcon: 'add',
 };
 
 export default Products;
