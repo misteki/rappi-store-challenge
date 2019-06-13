@@ -51,3 +51,9 @@ export const removeFromCart = async productId => new Promise((resolve, reject) =
     reject('Product removal failed: Product is not in cart.');
   }
 });
+
+// Simulates purchase by clearing cart
+export const buyCartProducts = async => new Promise((resolve) => {
+  localStorage.clear();
+  resolve('Success!');
+});

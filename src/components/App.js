@@ -5,8 +5,8 @@ import Navbar from './navbar/Navbar';
 import Store from './store/Store';
 import Cart from './cart/Cart';
 
-const STORE_VIEW_ID = 'store-view';
-const CART_VIEW_ID = 'cart-view-id';
+const STORE_VIEW_ID = 'store';
+const CART_VIEW_ID = 'view';
 
 class App extends React.Component {
   constructor() {
@@ -14,6 +14,13 @@ class App extends React.Component {
     this.state = {
       currentView: STORE_VIEW_ID,
     };
+    this.changeView = this.changeView.bind(this);
+  }
+
+  changeView(viewId) {
+    this.setState({
+      currentView: viewId,
+    });
   }
 
   render() {
@@ -21,7 +28,10 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <Navbar />
+        <Navbar
+          view={currentView}
+          onViewChange={this.changeView}
+        />
         {
           currentView === STORE_VIEW_ID
             ? <Store />

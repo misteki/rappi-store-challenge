@@ -9,7 +9,7 @@ const Products = (props) => {
     products, selectedProducts, currentPage, onAction, pageSize, actionIcon,
   } = props;
 
-  const firstProductInPageIndex = pageSize * currentPage;
+  const firstProductInPageIndex = pageSize === Infinity ? 0 : pageSize * currentPage;
   const lastProductInPageIndex = firstProductInPageIndex + pageSize;
   const productsInPage = products.slice(firstProductInPageIndex, lastProductInPageIndex);
 
@@ -56,16 +56,16 @@ const Products = (props) => {
               <h3 className="product-price">{product.price}</h3>
               <div className="product-details">
                 <p className={`product-availability ${product.available ? '' : 'not-available'}`}>
-                  {product.available ? 'Available' : 'Not available'}
+                  {product.available ? 'Disponible' : 'No disponible'}
                 </p>
-                <p className="product-quantity">{`${product.quantity} in stock`}</p>
+                <p className="product-quantity">{`${product.quantity} en stock`}</p>
               </div>
             </li>
           ))
         }
         {
           products.length === 0
-          && (<h1 className="no-products"> No products found</h1>)
+          && (<h1 className="no-products"> No se han encontrado productos. </h1>)
         }
       </ul>
     </React.Fragment>
@@ -76,7 +76,7 @@ Products.propTypes = {
   products: PropTypes.array.isRequired,
   currentPage: PropTypes.number,
   selectedProducts: PropTypes.array,
-  onAction: PropTypes.func,
+  onAction: PropTypes.func.isRequired,
   pageSize: PropTypes.number,
   actionIcon: PropTypes.oneOf(['add', 'remove']),
 };
@@ -85,7 +85,6 @@ Products.defaultProps = {
   selectedProducts: null,
   currentPage: 0,
   pageSize: Infinity,
-  onAction: null,
   actionIcon: 'add',
 };
 

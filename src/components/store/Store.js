@@ -64,8 +64,6 @@ class Store extends React.Component {
       this.setState({
         cart: [...cart, product],
       });
-    }, (error) => {
-      console.log(error);
     });
   }
 
