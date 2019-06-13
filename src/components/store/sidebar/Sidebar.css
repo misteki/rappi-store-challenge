@@ -1,4 +1,4 @@
-.categories-title {
+.filter-name {
   background-color: var(--color-primary);
   margin: 0;
   padding: 0.3em 1em 0.3em 0.5em;
@@ -43,4 +43,25 @@
 
 .category-list .selected {
   font-weight: bold;
+}
+
+.filter-controls {
+  margin-bottom: 1.5em;
+}
+
+.filter-checkbox {
+  display: flex;
+}
+
+.filter-controls label{
+  display: block;
+}
+
+.filter-controls input {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.filter-controls input[type='checkbox']{
+  margin-right: 0.5em;
 }

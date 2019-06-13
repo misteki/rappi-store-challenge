@@ -21,7 +21,15 @@ const getLocalStorageCartData = () => {
 };
 
 export const getProducts = async () => new Promise((resolve) => {
-  resolve(PRODUCTS_DATA.products);
+  const productsData = PRODUCTS_DATA.products;
+  const parsePrice = priceString => Number(priceString.replace(/[^0-9\.]+/g, ''));
+
+  // Parse propduct price as number
+  const products = productsData.map(p => ({
+    ...p,
+    price: parsePrice(p.price),
+  }));
+  resolve(products);
 });
 
 export const getCategories = async () => new Promise((resolve) => {

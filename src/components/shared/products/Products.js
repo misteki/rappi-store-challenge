@@ -53,7 +53,9 @@ const Products = (props) => {
                 actionButton(product)
               }
               <h2 className="product-name">{product.name}</h2>
-              <h3 className="product-price">{product.price}</h3>
+              <h3 className="product-price">
+                {`$${product.price}`}
+              </h3>
               <div className="product-details">
                 <p className={`product-availability ${product.available ? '' : 'not-available'}`}>
                   {product.available ? 'Disponible' : 'No disponible'}
