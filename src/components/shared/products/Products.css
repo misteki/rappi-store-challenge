@@ -7,6 +7,7 @@
 }
 
 .product-list-item {
+  position: relative;
   padding: 1em 1em 1em 2em;
   margin: 1em;
   border: 1px solid var(--color-gray);
@@ -55,6 +56,33 @@
   text-align: center;
   margin: 2em 0;
   width: 100%;
+}
+
+.cart-state {
+  position: absolute;
+  right: 1em;
+}
+
+.cart-state.confirmed {
+  color: var(--color-primary);
+}
+
+.cart-state.add {
+  color: var(--color-secondary);
+}
+
+.cart-state.add:hover svg{
+  fill: var(--color-secondary);
+  stroke: var(--color-light);
+}
+
+.cart-state.remove {
+  color: var(--color-accent);
+}
+
+.cart-state.remove:hover svg{
+  fill: var(--color-accent);
+  stroke: var(--color-light);
 }
 
 @media (max-width: 1023px) {  

@@ -6,7 +6,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Spanish was assumed to be the desired language.
 - A unique ID was not available for each category in the original source data. Change IDs so each category would have a unique one. IDs have been assumed to be only valid if they are numbers bigger than 0 (0 not admitted).
 - When selected a category, filter includes the category itself and all its subcategories.
-- The paginator size ( number of pages it displayed) was not capped due to the fact that there are at most 7 pages with the set page size and the amount of products in the hardcoded data; but it should be! (not implemented to save some time).
+- The paginator size ( number of pages it displayed) was not capped due to the fact that there are at most 7 pages with the set page size and the amount of products in the hardcoded data; but it should be!
+- Products that are not available can be added to the cart 
+- Products can be removed from the cart only from the Cart view
+- Service method errors are only informed using the console. For UX's sake this should not be the case, but the UI implementation was not explicitly required and thus was not implemented.
+- Considering there's only two distinct views (product list and cart), routing was not added.
+- When fetching local storage fails for any reason, an empty cart is returned and the storage is cleared to avoid future errors. The promises related to this always resolve successfully to save the time from writing error handling code on the consumers, but those should be in there when using actual HTTP calls instead of fetching hardcoded data.
+
 
 ## Available Scripts
 
