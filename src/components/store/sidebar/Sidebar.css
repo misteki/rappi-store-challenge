@@ -65,6 +65,8 @@
 .filter-controls input[type='number']{
   height: 1.5em;
   width: 90%;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
 }
 
 .filter-controls input[type='checkbox']{

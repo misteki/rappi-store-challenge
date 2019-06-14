@@ -1,0 +1,50 @@
+.controls-bar {
+  padding: 0.2em 3em 0.2em 2em;
+  height: 48px;
+  background-color: var(--color-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3em 0 2em;
+  font-size: 14px;
+}
+
+.sort-control-group {
+  display: flex;
+  align-items: center;
+}
+
+.sort-control:not(:last-child) {
+  margin-right: 1.5em;
+}
+
+.sort-control-label {
+  color: var(--color-light);
+  margin-right: 0.5em;
+}
+
+.sort-control-input {
+  font-size: 14px;
+  background-color: transparent;
+  color: var(--color-light);
+  border-color: var(--color-light);
+}
+
+.sort-control-button {
+  color: var(--color-light);
+  border: 1px solid var(--color-light);
+  border-radius: 4px;
+  height: 32px;
+  width: 32px;
+}
+
+.sort-control-input {
+  color: var(--color-light);
+  border: 1px solid var(--color-light);
+  padding: 0.2em 1em;
+  border-radius: 4px;
+}
+
+.sort-control.hidden {
+  visibility: hidden;
+}

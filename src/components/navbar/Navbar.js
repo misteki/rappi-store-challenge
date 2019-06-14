@@ -17,7 +17,7 @@ const Navbar = (props) => {
         view === 'cart'
         && (
         <button type="button" title="See your cart" className="view-button store-link" onClick={() => { onViewChange('store'); }}>
-          <ArrowLeft size={24} />
+          <ArrowLeft size={20} />
         </button>
         )
       }
@@ -25,7 +25,7 @@ const Navbar = (props) => {
         view === 'store'
         && (
         <button type="button" title="See your cart" className="view-button cart-link" onClick={() => { onViewChange('cart'); }}>
-          <ShoppingCart cart={36} />
+          <ShoppingCart cart={30} />
         </button>
         )
       }
