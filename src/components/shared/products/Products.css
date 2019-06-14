@@ -68,11 +68,11 @@
 }
 
 .cart-state.add {
-  color: var(--color-secondary);
+  color: var(--color-complementary);
 }
 
 .cart-state.add:hover svg{
-  fill: var(--color-secondary);
+  fill: var(--color-complementary);
   stroke: var(--color-light);
 }
 
