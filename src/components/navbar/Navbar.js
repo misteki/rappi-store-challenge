@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { ShoppingCart, List, Filter } from 'react-feather';
+
 import './Navbar.css';
 
 const Navbar = (props) => {
@@ -41,6 +43,11 @@ const Navbar = (props) => {
       </nav>
     </header>
   );
+};
+
+Navbar.propTypes = {
+  view: PropTypes.string.isRequired,
+  onViewChange: PropTypes.func.isRequired,
 };
 
 export default Navbar;

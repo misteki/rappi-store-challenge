@@ -7,7 +7,7 @@ import Cart from './cart/Cart';
 import Filters from './shared/filters/Filters';
 
 import {
-  getProducts, getCategories, addToCart, getCart,
+  getProducts, getCategories, addToCart, getCart, removeFromCart, buyCartProducts,
 } from '../services/store-service';
 
 const STORE_VIEW_ID = 'store';
@@ -43,6 +43,8 @@ class App extends React.Component {
     this.updateSortValue = this.updateSortValue.bind(this);
     this.updatePage = this.updatePage.bind(this);
     this.addProductToCart = this.addProductToCart.bind(this);
+    this.removeProductFromCart = this.removeProductFromCart.bind(this);
+    this.buyProductsInCart = this.buyProductsInCart.bind(this);
   }
 
   // Fetch categories and products
@@ -106,6 +108,28 @@ class App extends React.Component {
       this.setState({
         cart: [...cart, product],
       });
+    });
+  }
+
+  removeProductFromCart(product) {
+    const productId = product.id;
+    removeFromCart(product.id).then(() => {
+      const { cart } = this.state;
+      const cartWithoutProduct = cart.filter(p => p.id !== productId);
+      this.setState({
+        cart: cartWithoutProduct,
+      });
+    }, () => {
+      console.log('Error: product could not be removed.');
+    });
+  }
+
+  buyProductsInCart() {
+    buyCartProducts().then(() => {
+      this.setState({
+        cart: [],
+      });
+      console.log('Compra exitosa!');
     });
   }
 
@@ -182,7 +206,13 @@ class App extends React.Component {
         }
         {
           currentView === CART_VIEW_ID
-          && <Cart />
+          && (
+          <Cart
+            cart={cart}
+            onProductRemove={this.removeProductFromCart}
+            onBuy={this.buyProductsInCart}
+          />
+          )
         }
         {
           currentView === FILTERS_VIEW_ID

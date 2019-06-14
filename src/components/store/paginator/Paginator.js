@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, ArrowLeft } from 'react-feather';
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
 
 import './Paginator.css';
 
@@ -57,6 +58,19 @@ const Paginator = (props) => {
       }
     </nav>
   );
+};
+
+Paginator.propTypes = {
+  entries: PropTypes.array,
+  pageSize: PropTypes.number,
+  currentPage: PropTypes.number,
+  onPageChange: PropTypes.func.isRequired,
+};
+
+Paginator.defaultProps = {
+  entries: [],
+  pageSize: Infinity,
+  currentPage: 0,
 };
 
 export default Paginator;
