@@ -4,6 +4,7 @@ import './Store.css';
 import Sidebar from './sidebar/Sidebar';
 import Products from '../shared/products/Products';
 import Paginator from './paginator/Paginator';
+import ControlsBar from './controls-bar/ControlsBar';
 
 import {
   getProducts, getCategories, addToCart, getCart,
@@ -112,35 +113,38 @@ class Store extends React.Component {
         && (maxPrice === undefined || Number.isNaN(maxPrice) || product.price <= maxPrice));
 
     return (
-      <main className="store">
-        <aside className="sidebar">
-          <Sidebar
-            categories={categories}
-            onFilterValueChange={(filterId, value) => { this.onFilterValueChange(filterId, value); }}
-            filters={filters}
-          />
-        </aside>
+      <React.Fragment>
+        <ControlsBar />
+        <main className="store">
+          <aside className="sidebar">
+            <Sidebar
+              categories={categories}
+              onFilterValueChange={(filterId, value) => { this.onFilterValueChange(filterId, value); }}
+              filters={filters}
+            />
+          </aside>
 
-        <section className="products" role="main">
-          <Products
-            products={filteredProducts}
-            selectedProducts={cart.map(product => product.id)}
-            currentPage={currentProductPage}
-            onAction={this.addProductToCart}
-            pageSize={pageSize}
-            noMatchMessage="No se han encontrado productos que concidan con tus filtros"
-            actionIcon="add"
-          />
-          {products.length > 0 && (
+          <section className="products" role="main">
+            <Products
+              products={filteredProducts}
+              selectedProducts={cart.map(product => product.id)}
+              currentPage={currentProductPage}
+              onAction={this.addProductToCart}
+              pageSize={pageSize}
+              noMatchMessage="No se han encontrado productos que concidan con tus filtros"
+              actionIcon="add"
+            />
+            {products.length > 0 && (
             <Paginator
               entries={filteredProducts.length}
               pageSize={pageSize}
               currentPage={currentProductPage}
               onPageChange={this.onPageChange}
             />
-          )}
-        </section>
-      </main>
+            )}
+          </section>
+        </main>
+      </React.Fragment>
     );
   }
 }
