@@ -1,8 +1,8 @@
 .navbar {
   height: 48px;
   padding: 6px 48px 6px 24px;
-  background-color: var(--color-primary);
-  color: var(--color-dark);
+  background-color: var(--color-secondary);
+  color: var(--color-light);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,8 +24,7 @@
 .view-button {
   height: 46px;
   width: 46px;
-  border: 2px solid var(--color-dark);
-  box-shadow: 0px 2px 3px 0px var(--color-gray);
+  border: 2px solid var(--color-light);
   margin: 0px 8px;
   border-radius: 15px;
   display: flex;
@@ -34,9 +33,9 @@
 }
 
 .view-button:hover {
-  background-color: var(--color-dark);
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  background-color: var(--color-light);
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
   box-shadow: none;
 }
 

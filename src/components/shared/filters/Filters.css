@@ -4,7 +4,7 @@
   padding: 0.3em 2em 0.3em 0.5em;
   text-align: left;
   font-weight: 400;
-  margin: 0.5em 0;
+  margin: 0 0 0.5em 0;
   font-size: 1.2em;
   padding-top: 1em;
 }
@@ -73,4 +73,24 @@
 
 .filter-controls input[type='checkbox']{
   margin-right: 0.5em;
+}
+
+@media (max-width: 1023px) {
+
+  .filters {
+    font-size: 18px;
+  }
+
+  .filter-controls {
+    padding: 0 2em;
+  }
+
+  .category-list {
+    font-size: 16px;
+  }
+
+  .filter-controls input[type='number'], .filter-controls input[type='text']{
+    font-size: 18px;
+    height: 2em;
+  }
 }

@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Search,
-} from 'react-feather';
 
-import './Sidebar.css';
+import './Filters.css';
 
-const Sidebar = (props) => {
+const Filters = (props) => {
   const {
     categories,
     onFilterValueChange,
@@ -53,22 +50,6 @@ const Sidebar = (props) => {
     const newValue = Number.isNaN(value) ? undefined : value;
     onFilterValueChange(filterId, newValue);
   };
-
-  /*
-  <div className="sort-control-group">
-        <label className="sort-control-label" htmlFor="search-name">
-          <Search />
-        </label>
-        <input
-          type="text"
-          name="search-name"
-          id="search-name"
-          className="sort-control-input"
-          value={nameFilter}
-          onChange={(e) => { onFilterUpdate('name', e.target.value); }}
-        />
-      </div>
-      */
 
   return (
     <div className="filters">
@@ -154,16 +135,16 @@ const Sidebar = (props) => {
   );
 };
 
-Sidebar.propTypes = {
+Filters.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   onFilterValueChange: PropTypes.func.isRequired,
   selectedCategory: PropTypes.object,
   filters: PropTypes.object,
 };
 
-Sidebar.defaultProps = {
+Filters.defaultProps = {
   filters: null,
   selectedCategory: null,
 };
 
-export default Sidebar;
+export default Filters;
