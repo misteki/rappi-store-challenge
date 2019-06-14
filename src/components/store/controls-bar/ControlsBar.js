@@ -1,15 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ArrowUp, ArrowDown } from 'react-feather';
+import { ArrowUp, ArrowDown, Search } from 'react-feather';
 
 import './ControlsBar.css';
 
 const ControlsBar = (props) => {
-  const { sortAttribute, ascendingOrder, onSortChange } = props;
+  const {
+    nameFilter, sortAttribute, ascendingOrder, onSortChange, onFilterUpdate,
+  } = props;
 
   return (
     <section className="controls-bar">
-      <span>Breadcrumb placeholder</span>
+      <div className="sort-control-group">
+        <label className="sort-control-label" htmlFor="search-name">
+          <Search />
+        </label>
+        <input
+          type="text"
+          name="search-name"
+          id="search-name"
+          className="sort-control-input"
+          value={nameFilter}
+          onChange={(e) => { onFilterUpdate('name', e.target.value); }}
+        />
+      </div>
       <div className="sort-control-group">
         <div className="sort-control">
           <label className="sort-control-label" htmlFor="sort-by"> Ordenar por </label>
@@ -52,13 +66,16 @@ const ControlsBar = (props) => {
 };
 
 ControlsBar.propTypes = {
+  nameFilter: PropTypes.string,
   sortAttribute: PropTypes.string,
   ascendingOrder: PropTypes.bool,
   onSortChange: PropTypes.func.isRequired,
+  onFilterUpdate: PropTypes.func.isRequired,
 };
 
 ControlsBar.defaultProps = {
-  sortAttribute: null,
+  nameFilter: undefined,
+  sortAttribute: undefined,
   ascendingOrder: true,
 };
 

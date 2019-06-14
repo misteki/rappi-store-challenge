@@ -22,6 +22,7 @@ class Store extends React.Component {
       filters: {
         category: undefined,
         availability: undefined,
+        name: undefined,
         minStock: undefined,
         maxStock: undefined,
         minPrice: undefined,
@@ -107,6 +108,7 @@ class Store extends React.Component {
       maxStock,
       minPrice,
       maxPrice,
+      name,
     } = filters;
 
     // Get all the sub-categories for the selected category
@@ -128,6 +130,7 @@ class Store extends React.Component {
     const filteredProducts = products
       .filter(product => (!category || selectedCategoriesIDs.includes(product.sublevel_id))
         && (availability === undefined || product.available === availability)
+        && (name === undefined || product.name.includes(name))
         && (minStock === undefined || Number.isNaN(minStock) || product.quantity >= minStock)
         && (maxStock === undefined || Number.isNaN(maxStock) || product.quantity <= maxStock)
         && (minPrice === undefined || Number.isNaN(minPrice) || product.price >= minPrice)
@@ -145,6 +148,8 @@ class Store extends React.Component {
           sortAttribute={attribute}
           ascendingOrder={isAscending}
           onSortChange={this.updateSortValue}
+          nameFilter={name}
+          onFilterUpdate={(filterId, value) => { this.updateFilterValue(filterId, value); }}
         />
         <main className="store">
           <aside className="sidebar">
