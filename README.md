@@ -12,6 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Service method errors are only informed using the console. For UX's sake this should not be the case, but the UI implementation was not explicitly required and thus was not implemented.
 - Considering there's only two distinct views (product list and cart), routing was not added.
 - When fetching local storage fails for any reason, an empty cart is returned and the storage is cleared to avoid future errors. The promises related to this always resolve successfully to save the time from writing error handling code on the consumers, but those should be in there when using actual HTTP calls instead of fetching hardcoded data.
+- The assignement said: "Un subnivel final es aquel que no tiene más subniveles, en éste caso debe aparecer una caja de texto que permita realizar búsquedas de productos por nombre en dichos subniveles." It is confusing: at a final sublevel there no mpore sublevels to search in, as it says. Since I was unable to determine when the search box had to be displayed I display it by default (which makes more much sense form a UX perspective as well).
 
 
 ## Available Scripts

@@ -144,13 +144,6 @@ class Store extends React.Component {
 
     return (
       <React.Fragment>
-        <ControlsBar
-          sortAttribute={attribute}
-          ascendingOrder={isAscending}
-          onSortChange={this.updateSortValue}
-          nameFilter={name}
-          onFilterUpdate={(filterId, value) => { this.updateFilterValue(filterId, value); }}
-        />
         <main className="store">
           <aside className="sidebar">
             <Sidebar
@@ -161,6 +154,13 @@ class Store extends React.Component {
           </aside>
 
           <section className="products" role="main">
+            <ControlsBar
+              sortAttribute={attribute}
+              ascendingOrder={isAscending}
+              onSortChange={this.updateSortValue}
+              nameFilter={name}
+              onFilterUpdate={(filterId, value) => { this.updateFilterValue(filterId, value); }}
+            />
             <Products
               products={filteredProducts}
               selectedProducts={cart.map(product => product.id)}

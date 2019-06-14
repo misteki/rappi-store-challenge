@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ShoppingCart, ArrowLeft } from 'react-feather';
+import { ShoppingCart, List, Filter } from 'react-feather';
 import './Navbar.css';
 
 const Navbar = (props) => {
@@ -13,22 +13,32 @@ const Navbar = (props) => {
       <h1 className="navbar-title">
         {title}
       </h1>
-      {
-        view === 'cart'
+      <nav className="link-buttons">
+        {
+        view !== 'store'
         && (
-        <button type="button" title="See your cart" className="view-button store-link" onClick={() => { onViewChange('store'); }}>
-          <ArrowLeft size={20} />
+        <button type="button" title="Back to the store" className="view-button store-link" onClick={() => { onViewChange('store'); }}>
+          <List size={20} />
         </button>
         )
       }
-      {
-        view === 'store'
+        {
+        view !== 'cart'
         && (
         <button type="button" title="See your cart" className="view-button cart-link" onClick={() => { onViewChange('cart'); }}>
           <ShoppingCart cart={30} />
         </button>
         )
       }
+        {
+        view !== 'filters'
+        && (
+        <button type="button" title="See filters" className="view-button mobile-hide filters-link" onClick={() => { onViewChange('filters'); }}>
+          <Filter cart={30} />
+        </button>
+        )
+      }
+      </nav>
     </header>
   );
 };
