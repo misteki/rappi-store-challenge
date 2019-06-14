@@ -1,7 +1,7 @@
-.categories-title {
+.filter-name {
   background-color: var(--color-primary);
   margin: 0;
-  padding: 0.3em 1em 0.3em 0.5em;
+  padding: 0.3em 2em 0.3em 0.5em;
   text-align: left;
   font-weight: 400;
   margin: 0.5em 0;
@@ -24,7 +24,7 @@
 }
 
 .category-list-item {
-  color: var(--color-secondary);
+  color: var(--color-complementary);
   cursor: pointer;
   font-weight: 400;
 }
@@ -41,6 +41,32 @@
   margin-bottom: 0.5em;
 }
 
-.category-list .selected {
+.category-list-item .selected {
   font-weight: bold;
+}
+
+.filter-controls {
+  margin-bottom: 1.5em;
+}
+
+.filter-checkbox {
+  display: flex;
+}
+
+.filter-controls label{
+  display: block;
+}
+
+.filter-controls input {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.filter-controls input[type='number']{
+  height: 1.5em;
+  width: 90%;
+}
+
+.filter-controls input[type='checkbox']{
+  margin-right: 0.5em;
 }

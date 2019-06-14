@@ -13,38 +13,48 @@ const Paginator = (props) => {
   const firstPage = 0;
   const lastPage = pages - 1;
 
+  const changePage = (page) => {
+    if (page >= firstPage && page <= lastPage) {
+      onPageChange(page);
+    }
+  };
+
   return (
     <nav className="paginator-container">
-      <div className="paginator">
-        {
-          currentPage > firstPage
-          && (
-          <button type="button" onClick={() => { onPageChange(currentPage - 1); }}>
-            <ArrowLeft size={14} />
-          </button>
-          )
-          }
-        {
-        [...Array(pages)].map((page, pageIndex) => (
+      {
+        entries > 0
+        && (
+        <div className="paginator">
           <button
             type="button"
-            className={`paginator-button ${pageIndex === currentPage ? 'selected' : ''}`}
-            onClick={() => { onPageChange(pageIndex); }}
-            key={shortid.generate()}
+            className={currentPage > firstPage ? '' : 'invisible'}
+            onClick={() => { changePage(currentPage - 1); }}
           >
-            {pageIndex + 1}
+            <ArrowLeft size={14} />
           </button>
-        ))
-      }
-        {
-          currentPage < lastPage
-          && (
-          <button type="button" onClick={() => { onPageChange(currentPage + 1); }}>
+          {
+             [...Array(pages)].map((page, pageIndex) => (
+               <button
+                 type="button"
+                 className={`paginator-button ${pageIndex === currentPage ? 'selected' : ''}`}
+                 onClick={() => { changePage(pageIndex); }}
+                 key={shortid.generate()}
+               >
+                 {pageIndex + 1}
+               </button>
+             ))
+           }
+          <button
+            type="button"
+            className={currentPage < lastPage ? '' : 'invisible'}
+            onClick={() => { changePage(currentPage + 1); }}
+          >
             <ArrowRight size={14} />
           </button>
-          )
-          }
-      </div>
+
+        </div>
+        )
+      }
     </nav>
   );
 };

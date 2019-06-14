@@ -22,10 +22,10 @@
 
 .paginator-button.selected {
   font-weight: bolder;
-  color: var(--color-secondary);
-  border-bottom: 1px solid var(--color-secondary);
+  color: var(--color-complementary);
+  border-bottom: 1px solid var(--color-complementary);
 }
 
-.navigation-arrow {
-  cursor: pointer;
+.invisible {
+  visibility: hidden;
 }

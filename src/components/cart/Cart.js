@@ -55,6 +55,7 @@ class Cart extends React.Component {
           <Products
             products={cart}
             onAction={this.removeProductToCart}
+            noMatchMessage="No hay productos en el carrito"
             actionIcon="remove"
           />
         </section>

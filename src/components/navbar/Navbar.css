@@ -39,15 +39,3 @@
   display: flex;
   align-items: center;
 }
-
-.view-button.store-link {
-  font-weight: bold;
-  padding: 0.5em 1em;
-  display: flex;
-  align-items: center;
-}
-
-.view-button.store-link svg {
-  margin-right: 6px;
-  margin-top: 2px;
-}
