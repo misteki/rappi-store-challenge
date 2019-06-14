@@ -37,7 +37,8 @@ const Sidebar = (props) => {
             </button>
           </li>
           {
-            category.sublevels && isSublevelSelected(category) && categoriesList(category.sublevels, false)
+            category.sublevels && isSublevelSelected(category)
+            && <li className="category-list-item">{ categoriesList(category.sublevels, false) }</li>
           }
         </React.Fragment>
       ))}
