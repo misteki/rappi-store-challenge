@@ -6,7 +6,7 @@ import './Products.css';
 
 const Products = (props) => {
   const {
-    products, selectedProducts, currentPage, onAction, pageSize, actionIcon,
+    products, selectedProducts, currentPage, onAction, pageSize, actionIcon, noMatchMessage,
   } = props;
 
   const firstProductInPageIndex = pageSize === Infinity ? 0 : pageSize * currentPage;
@@ -67,7 +67,11 @@ const Products = (props) => {
         }
         {
           products.length === 0
-          && (<h1 className="no-products"> No se han encontrado productos. </h1>)
+          && (
+          <h1 className="no-products">
+            {noMatchMessage}
+          </h1>
+          )
         }
       </ul>
     </React.Fragment>
@@ -81,6 +85,7 @@ Products.propTypes = {
   onAction: PropTypes.func.isRequired,
   pageSize: PropTypes.number,
   actionIcon: PropTypes.oneOf(['add', 'remove']),
+  noMatchMessage: PropTypes.string,
 };
 
 Products.defaultProps = {
@@ -88,6 +93,7 @@ Products.defaultProps = {
   currentPage: 0,
   pageSize: Infinity,
   actionIcon: 'add',
+  noMatchMessage: 'No se han encontrado productos',
 };
 
 export default Products;

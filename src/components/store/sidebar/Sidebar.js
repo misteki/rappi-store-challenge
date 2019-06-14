@@ -19,21 +19,25 @@ const Sidebar = (props) => {
     maxPrice,
   } = filters;
 
+  const isCategorySelected = categoryId => selectedCategory && categoryId === selectedCategory.id;
+  const isSublevelSelected = category => (selectedCategory && category.id === selectedCategory.id)
+    || (category.sublevels && category.sublevels.some(c => isSublevelSelected(c)));
+
   const categoriesList = (levelCategories, isParent) => (
     <ul className={`category-list ${isParent ? 'first-level' : 'sublevel'}`}>
       {levelCategories.map(category => (
         <React.Fragment key={category.id}>
-          <li>
+          <li className="category-list-item">
             <button
               type="button"
-              className={selectedCategory && category.id === selectedCategory.id ? 'category-list-item selected' : 'category-list-item'}
+              className={isCategorySelected(category.id) ? 'category-button selected' : 'ategory-button-item'}
               onClick={() => { onFilterValueChange('category', category); }}
             >
               {category.name}
             </button>
           </li>
           {
-            category.sublevels && categoriesList(category.sublevels, false)
+            category.sublevels && isSublevelSelected(category) && categoriesList(category.sublevels, false)
           }
         </React.Fragment>
       ))}

@@ -128,6 +128,7 @@ class Store extends React.Component {
             currentPage={currentProductPage}
             onAction={this.addProductToCart}
             pageSize={pageSize}
+            noMatchMessage="No se han encontrado productos que concidan con tus filtros"
             actionIcon="add"
           />
           {products.length > 0 && (

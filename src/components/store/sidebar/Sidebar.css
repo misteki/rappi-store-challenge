@@ -62,6 +62,11 @@
   margin-bottom: 1em;
 }
 
+.filter-controls input[type='number']{
+  height: 1.5em;
+  width: 90%;
+}
+
 .filter-controls input[type='checkbox']{
   margin-right: 0.5em;
 }
