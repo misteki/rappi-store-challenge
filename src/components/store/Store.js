@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Store.css';
 import Filters from '../shared/filters/Filters';
@@ -70,6 +71,30 @@ const Store = (props) => {
       </main>
     </React.Fragment>
   );
+};
+
+Store.propTypes = {
+  products: PropTypes.array,
+  categories: PropTypes.array,
+  cart: PropTypes.array,
+  currentProductPage: PropTypes.number,
+  pageSize: PropTypes.number,
+  filters: PropTypes.object,
+  sort: PropTypes.object,
+  onFilterValueChange: PropTypes.func.isRequired,
+  onSortValueUpdate: PropTypes.func.isRequired,
+  onAddToCart: PropTypes.func.isRequired,
+  onPageUpdate: PropTypes.func.isRequired,
+};
+
+Store.defaultProps = {
+  products: [],
+  categories: [],
+  cart: [],
+  currentProductPage: 0,
+  pageSize: Infinity,
+  filters: null,
+  sort: null,
 };
 
 export default Store;
