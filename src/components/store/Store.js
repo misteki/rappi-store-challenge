@@ -18,6 +18,7 @@ class Store extends React.Component {
       categories: [],
       cart: [],
       currentProductPage: 0,
+      pageSize: 9,
       filters: {
         category: undefined,
         availability: undefined,
@@ -26,9 +27,14 @@ class Store extends React.Component {
         minPrice: undefined,
         maxPrice: undefined,
       },
+      sort: {
+        attribute: null,
+        isAscending: true,
+      },
     };
-    this.onFilterValueChange = this.onFilterValueChange.bind(this);
-    this.onPageChange = this.onPageChange.bind(this);
+    this.updateFilterValue = this.updateFilterValue.bind(this);
+    this.updateSortValue = this.updateSortValue.bind(this);
+    this.updatePage = this.updatePage.bind(this);
     this.addProductToCart = this.addProductToCart.bind(this);
   }
 
@@ -53,7 +59,7 @@ class Store extends React.Component {
     });
   }
 
-  onFilterValueChange(filterId, value) {
+  updateFilterValue(filterId, value) {
     const { filters } = this.state;
     this.setState({
       currentProductPage: 0,
@@ -64,7 +70,18 @@ class Store extends React.Component {
     });
   }
 
-  onPageChange(page) {
+  updateSortValue(sortOption, value) {
+    const { sort } = this.state;
+    this.setState({
+      currentProductPage: 0,
+      sort: {
+        ...sort,
+        [sortOption]: value,
+      },
+    });
+  }
+
+  updatePage(page) {
     this.setState({
       currentProductPage: page,
     });
@@ -81,7 +98,7 @@ class Store extends React.Component {
 
   render() {
     const {
-      products, categories, filters, currentProductPage, cart,
+      products, categories, filters, currentProductPage, pageSize, cart, sort,
     } = this.state;
     const {
       category,
@@ -92,34 +109,48 @@ class Store extends React.Component {
       maxPrice,
     } = filters;
 
-    const pageSize = 9;
-
-    const getSubcategoriesIDs = (category) => {
+    // Get all the sub-categories for the selected category
+    const getSubcategoriesIDs = (c) => {
       let ids = [];
-      if (category.sublevels) {
-        ids = category.sublevels.map(subcategory => getSubcategoriesIDs(subcategory));
+      if (c.sublevels) {
+        ids = c.sublevels.map(subcategory => getSubcategoriesIDs(subcategory));
       }
-      return [category.id, ...ids.flat()];
+      return [c.id, ...ids.flat()];
     };
     const selectedCategoriesIDs = category ? getSubcategoriesIDs(category) : [];
 
-    // Apply filters
+    // Apply filters and sorting
+    const {
+      attribute,
+      isAscending,
+    } = sort;
+
     const filteredProducts = products
       .filter(product => (!category || selectedCategoriesIDs.includes(product.sublevel_id))
         && (availability === undefined || product.available === availability)
         && (minStock === undefined || Number.isNaN(minStock) || product.quantity >= minStock)
         && (maxStock === undefined || Number.isNaN(maxStock) || product.quantity <= maxStock)
         && (minPrice === undefined || Number.isNaN(minPrice) || product.price >= minPrice)
-        && (maxPrice === undefined || Number.isNaN(maxPrice) || product.price <= maxPrice));
+        && (maxPrice === undefined || Number.isNaN(maxPrice) || product.price <= maxPrice))
+      .sort((a, b) => {
+        const aValue = a[attribute];
+        const bValue = b[attribute];
+        const isAFirst = isAscending ? aValue < bValue : bValue < aValue;
+        return isAFirst ? -1 : 1;
+      });
 
     return (
       <React.Fragment>
-        <ControlsBar />
+        <ControlsBar
+          sortAttribute={attribute}
+          ascendingOrder={isAscending}
+          onSortChange={this.updateSortValue}
+        />
         <main className="store">
           <aside className="sidebar">
             <Sidebar
               categories={categories}
-              onFilterValueChange={(filterId, value) => { this.onFilterValueChange(filterId, value); }}
+              onFilterValueChange={(filterId, value) => { this.updateFilterValue(filterId, value); }}
               filters={filters}
             />
           </aside>
@@ -139,7 +170,7 @@ class Store extends React.Component {
               entries={filteredProducts.length}
               pageSize={pageSize}
               currentPage={currentProductPage}
-              onPageChange={this.onPageChange}
+              onPageChange={this.updatePage}
             />
             )}
           </section>

@@ -54,7 +54,7 @@ const Products = (props) => {
               }
               <h2 className="product-name">{product.name}</h2>
               <h3 className="product-price">
-                {`$${product.price}`}
+                {product.price.toLocaleString('en', { style: 'currency', currency: 'USD' })}
               </h3>
               <div className="product-details">
                 <p className={`product-availability ${product.available ? '' : 'not-available'}`}>
