@@ -8,6 +8,10 @@
   --color-accent: #B6174B;
 }
 
+#root {
+	width: 100vw;
+}
+
 button, input[type="submit"], input[type="reset"] {
 	background: none;
 	color: inherit;

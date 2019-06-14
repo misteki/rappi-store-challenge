@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Sidebar.css';
+import './Filters.css';
 
-const Sidebar = (props) => {
+const Filters = (props) => {
   const {
     categories,
     onFilterValueChange,
@@ -17,6 +17,7 @@ const Sidebar = (props) => {
     maxStock,
     minPrice,
     maxPrice,
+    name,
   } = filters;
 
   const isCategorySelected = categoryId => selectedCategory && categoryId === selectedCategory.id;
@@ -55,6 +56,19 @@ const Sidebar = (props) => {
       <h3 className="filter-name"> Categorías </h3>
       <div className="filter-controls">
         {categoriesList(categories, true)}
+      </div>
+      <h3 className="filter-name"> Nombre </h3>
+      <div className="filter-controls">
+        <label htmlFor="search-name">
+          Búsqueda
+        </label>
+        <input
+          type="text"
+          name="search-name"
+          id="search-name"
+          value={name}
+          onChange={(e) => { onFilterValueChange('name', e.target.value); }}
+        />
       </div>
       <h3 className="filter-name"> Disponibilidad </h3>
       <div className="filter-controls">
@@ -121,16 +135,16 @@ const Sidebar = (props) => {
   );
 };
 
-Sidebar.propTypes = {
+Filters.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   onFilterValueChange: PropTypes.func.isRequired,
   selectedCategory: PropTypes.object,
   filters: PropTypes.object,
 };
 
-Sidebar.defaultProps = {
+Filters.defaultProps = {
   filters: null,
   selectedCategory: null,
 };
 
-export default Sidebar;
+export default Filters;

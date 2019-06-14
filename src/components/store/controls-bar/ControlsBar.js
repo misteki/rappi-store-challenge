@@ -1,36 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ArrowUp, ArrowDown, Search } from 'react-feather';
+import {
+  ArrowUp, ArrowDown,
+} from 'react-feather';
 
 import './ControlsBar.css';
 
 const ControlsBar = (props) => {
   const {
-    nameFilter, sortAttribute, ascendingOrder, onSortChange, onFilterUpdate,
+    sortAttribute, ascendingOrder, onSortChange,
   } = props;
 
   return (
     <section className="controls-bar">
       <div className="sort-control-group">
-        <label className="sort-control-label" htmlFor="search-name">
-          <Search />
-        </label>
-        <input
-          type="text"
-          name="search-name"
-          id="search-name"
-          className="sort-control-input"
-          value={nameFilter}
-          onChange={(e) => { onFilterUpdate('name', e.target.value); }}
-        />
-      </div>
-      <div className="sort-control-group">
         <div className="sort-control">
-          <label className="sort-control-label" htmlFor="sort-by"> Ordenar por </label>
+          <label className="sort-control-label" htmlFor="sort-by">
+            <span>Ordenar por</span>
+          </label>
           <select
             name="sort-by"
             id="sort-by"
-            className="sort-control-input"
+            className="sort-control-select"
             onChange={(e) => { onSortChange('attribute', e.target.value); }}
             defaultValue=""
           >
@@ -42,7 +33,7 @@ const ControlsBar = (props) => {
         </div>
         <div className={`sort-control ${sortAttribute ? '' : 'hidden'}`}>
           <label
-            className="sort-control-label"
+            className="sort-control-label mobile-hide"
             htmlFor="sort-by"
           >
           Orden
@@ -66,15 +57,12 @@ const ControlsBar = (props) => {
 };
 
 ControlsBar.propTypes = {
-  nameFilter: PropTypes.string,
   sortAttribute: PropTypes.string,
   ascendingOrder: PropTypes.bool,
   onSortChange: PropTypes.func.isRequired,
-  onFilterUpdate: PropTypes.func.isRequired,
 };
 
 ControlsBar.defaultProps = {
-  nameFilter: undefined,
   sortAttribute: undefined,
   ascendingOrder: true,
 };
