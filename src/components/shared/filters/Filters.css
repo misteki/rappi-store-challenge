@@ -43,7 +43,7 @@
 }
 
 .category-list-item .selected {
-  font-weight: bold;
+  font-weight: 800;
 }
 
 .filter-controls {
@@ -64,10 +64,7 @@
 }
 
 .filter-controls input[type='number'], .filter-controls input[type='text']{
-  height: 1.5em;
   width: 90%;
-  border: 1px solid var(--color-gray);
-  border-radius: 4px;
   margin-top: 4px;
 }
 
@@ -87,6 +84,14 @@
 
   .category-list {
     font-size: 16px;
+  }
+
+  .category-list-item {
+    padding: 0.3em 0;
+  }
+
+  .category-list.first-level {
+    padding: 0em;
   }
 
   .filter-controls input[type='number'], .filter-controls input[type='text']{

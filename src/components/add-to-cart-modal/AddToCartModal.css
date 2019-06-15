@@ -1,0 +1,30 @@
+.edit-product-modal-container {
+  background-color: rgba(0,0,0,0.2);
+  padding: 1.5em !important;
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-light);
+  border-radius: 4px;
+  width: 260px !important;
+  text-align: center;
+}
+
+.amount-input {
+  font-size: 14px;
+  padding: 0 4px;
+  width: calc(100% - 4px);
+}
+
+.confirm-button {
+  margin-top: 2em;
+  font-weight: bold;
+  padding: 0.5em;
+  border: 1px solid var(--color-complementary);
+  color: var(--color-complementary);
+  box-shadow: 0px 2px 3px 0px var(--color-gray);
+  border-radius: 4px;
+}
+
+.confirm-button:disabled {
+  border: 1px solid var(--color-gray);
+  color: var(--color-gray);
+}

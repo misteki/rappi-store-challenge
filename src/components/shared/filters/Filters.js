@@ -100,6 +100,8 @@ const Filters = (props) => {
           type="number"
           name="stock-min"
           id="stock-min"
+          min={0}
+          step={1}
           value={minStock}
           onChange={(e) => { onNumberValueChange('minStock', parseInt(e.target.value, 10)); }}
         />
@@ -108,6 +110,8 @@ const Filters = (props) => {
           type="number"
           name="stock-max"
           id="stock-max"
+          min={0}
+          step={1}
           value={maxStock}
           onChange={(e) => { onNumberValueChange('maxStock', parseInt(e.target.value, 10)); }}
         />
@@ -119,6 +123,8 @@ const Filters = (props) => {
           type="number"
           name="price-min"
           id="price-min"
+          min={0}
+          step={1}
           value={minPrice}
           onChange={(e) => { onNumberValueChange('minPrice', parseInt(e.target.value, 10)); }}
         />
@@ -127,6 +133,8 @@ const Filters = (props) => {
           type="number"
           name="price-max"
           id="price-max"
+          min={0}
+          step={1}
           value={maxPrice}
           onChange={(e) => { onNumberValueChange('maxPrice', parseInt(e.target.value, 10)); }}
         />

@@ -5,6 +5,7 @@ import Navbar from './navbar/Navbar';
 import Store from './store/Store';
 import Cart from './cart/Cart';
 import Filters from './shared/filters/Filters';
+import AddToCartModal from './add-to-cart-modal/AddToCartModal';
 
 import {
   getProducts, getCategories, addToCart, getCart, removeFromCart, buyCartProducts,
@@ -37,6 +38,10 @@ class App extends React.Component {
         attribute: null,
         isAscending: true,
       },
+      addToCartModal: {
+        show: false,
+        product: null,
+      },
     };
     this.changeView = this.changeView.bind(this);
     this.updateFilterValue = this.updateFilterValue.bind(this);
@@ -45,6 +50,8 @@ class App extends React.Component {
     this.addProductToCart = this.addProductToCart.bind(this);
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.buyProductsInCart = this.buyProductsInCart.bind(this);
+    this.openAddToCartModal = this.openAddToCartModal.bind(this);
+    this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
   }
 
   // Fetch categories and products
@@ -102,11 +109,18 @@ class App extends React.Component {
     });
   }
 
-  addProductToCart(product) {
+  addProductToCart(product, amount) {
     addToCart(product).then(() => {
       const { cart } = this.state;
       this.setState({
-        cart: [...cart, product],
+        cart: [...cart, {
+          ...product,
+          amount,
+        },
+        ],
+        addToCartModal: {
+          show: false,
+        },
       });
     });
   }
@@ -133,9 +147,27 @@ class App extends React.Component {
     });
   }
 
+  openAddToCartModal(product) {
+    this.setState({
+      addToCartModal: {
+        product,
+        show: true,
+      },
+    });
+  }
+
+  closeAddToCartModal() {
+    this.setState({
+      addToCartModal: {
+        product: null,
+        show: false,
+      },
+    });
+  }
+
   render() {
     const {
-      products, categories, filters, currentProductPage, pageSize, cart, sort,
+      products, categories, filters, currentProductPage, pageSize, cart, sort, addToCartModal,
     } = this.state;
     const {
       category,
@@ -178,6 +210,7 @@ class App extends React.Component {
         return isAFirst ? -1 : 1;
       });
 
+    const { show: showAddToCartModal, product: selectedProduct } = addToCartModal;
     const { currentView } = this.state;
 
     return (
@@ -199,7 +232,7 @@ class App extends React.Component {
             sort={sort}
             onFilterValueChange={this.updateFilterValue}
             onSortValueUpdate={this.updateSortValue}
-            onAddToCart={this.addProductToCart}
+            onAddToCart={this.openAddToCartModal}
             onPageUpdate={this.updatePage}
           />
           )
@@ -224,6 +257,12 @@ class App extends React.Component {
           />
           )
         }
+        <AddToCartModal
+          open={showAddToCartModal}
+          product={selectedProduct}
+          onClose={this.closeAddToCartModal}
+          onConfirm={this.addProductToCart}
+        />
       </div>
     );
   }
