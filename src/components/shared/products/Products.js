@@ -56,6 +56,13 @@ const Products = (props) => {
               <h3 className="product-price">
                 {product.price.toLocaleString('en', { style: 'currency', currency: 'USD' })}
               </h3>
+              {product.amount && (
+              <p className="product-amount">
+                <b>{product.amount}</b>
+                {' '}
+                en el carrito
+              </p>
+              ) }
               <div className="product-details">
                 <p className={`product-availability ${product.available ? '' : 'not-available'}`}>
                   {product.available ? 'Disponible' : 'No disponible'}

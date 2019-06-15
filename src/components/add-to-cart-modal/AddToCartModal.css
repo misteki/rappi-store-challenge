@@ -1,6 +1,6 @@
 .edit-product-modal-container {
   background-color: rgba(0,0,0,0.2);
-  padding: 1.5em !important;
+  padding: 24px 32px !important;
   border: 1px solid var(--color-gray);
   background-color: var(--color-light);
   border-radius: 4px;
