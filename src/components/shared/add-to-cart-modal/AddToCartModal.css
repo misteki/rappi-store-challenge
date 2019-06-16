@@ -4,7 +4,7 @@
   border: 1px solid var(--color-gray);
   background-color: var(--color-light);
   border-radius: 4px;
-  width: 280px !important;
+  width: 260px !important;
   text-align: center;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .confirm-button {
-  margin: 1em;
+  margin-top: 2em;
   font-weight: bold;
   padding: 0.5em;
   border: 1px solid var(--color-complementary);
@@ -27,21 +27,4 @@
 .confirm-button:disabled {
   border: 1px solid var(--color-gray);
   color: var(--color-gray);
-}
-
-.remove-button {
-  margin: 1em;
-  font-weight: bold;
-  padding: 0.5em;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: 0px 2px 3px 0px var(--color-gray);
-  border-radius: 4px;
-}
-
-.modal-footer {
-  margin-top: 1em;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 }

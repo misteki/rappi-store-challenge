@@ -8,16 +8,25 @@ import './Cart.css';
 const Cart = (props) => {
   const {
     cart,
-    onProductRemove,
+    onProductEdit,
     onBuy,
   } = props;
 
+  const totalPrice = cart.reduce((acc, product) => { console.log(product.price, product.amount); return acc + product.price * product.amount ;}, 0);
+
   return (
     <main className="cart">
+      <header>
+        <h2 className="total-price">
+        Total general:
+          {' '}
+          {totalPrice.toLocaleString('en', { style: 'currency', currency: 'USD' })}
+        </h2>
+      </header>
       <section className="cart-products" role="main">
         <Products
           products={cart}
-          onAction={onProductRemove}
+          onAction={onProductEdit}
           noMatchMessage="No hay productos en el carrito"
           actionIcon="remove"
         />
@@ -34,7 +43,7 @@ const Cart = (props) => {
 
 Cart.propTypes = {
   cart: PropTypes.array,
-  onProductRemove: PropTypes.func.isRequired,
+  onProductEdit: PropTypes.func.isRequired,
   onBuy: PropTypes.func.isRequired,
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PlusCircle, CheckCircle, XCircle } from 'react-feather';
+import { PlusCircle, CheckCircle, Edit } from 'react-feather';
 
 import './Products.css';
 
@@ -22,14 +22,14 @@ const Products = (props) => {
             ? (
               <button
                 type="button"
-                className={`cart-state ${actionIcon}`}
-                title="Add to cart"
+                className="cart-state action"
+                title={actionIcon === 'add' ? 'Agregar al carrito' : 'Editar producto'}
                 onClick={() => onAction(product)}
               >
                 {
               actionIcon === 'add'
                 ? <PlusCircle size={36} />
-                : <XCircle size={36} />
+                : <Edit size={36} />
             }
               </button>
             )

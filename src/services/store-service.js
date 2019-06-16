@@ -41,9 +41,9 @@ export const getCart = async () => new Promise((resolve) => {
   resolve(cart);
 });
 
-export const addToCart = async product => new Promise((resolve) => {
+export const addToCart = async (product, amount) => new Promise((resolve) => {
   const cart = getLocalStorageCartData();
-  cart.push(product);
+  cart.push({ ...product, amount });
   localStorage.setItem(CART_SESSION_KEY, JSON.stringify(cart));
   resolve(product);
 });
@@ -55,6 +55,19 @@ export const removeFromCart = async productId => new Promise((resolve, reject) =
     cart.splice(productIndex, 1);
     localStorage.setItem(CART_SESSION_KEY, JSON.stringify(cart));
     resolve('Product removed successfully.');
+  } else {
+    reject('Product removal failed: Product is not in cart.');
+  }
+});
+
+export const editInCart = async (productId, amount) => new Promise((resolve, reject) => {
+  const cart = getLocalStorageCartData();
+  const productIndex = cart.map(product => product.id).indexOf(productId);
+  if (productIndex > -1) {
+    const product = cart[productIndex];
+    cart.splice(productIndex, 1, { ...product, amount });
+    localStorage.setItem(CART_SESSION_KEY, JSON.stringify(cart));
+    resolve('Product edited successfully.');
   } else {
     reject('Product removal failed: Product is not in cart.');
   }

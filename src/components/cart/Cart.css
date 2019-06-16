@@ -32,3 +32,8 @@
   color: var(--color-light);
   box-shadow: none;
 }
+
+.total-price {
+  text-align: center;
+  margin: 0.5em;
+}

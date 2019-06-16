@@ -13,6 +13,15 @@ class AddToCartModal extends React.Component {
     this.confirm = this.confirm.bind(this);
   }
 
+  componentDidMount() {
+    const { product } = this.props;
+    if (product && product.amount) {
+      this.setState({
+        amount: product.amount,
+      });
+    }
+  }
+
   updateAmount(amount) {
     this.setState({
       amount,
@@ -20,17 +29,30 @@ class AddToCartModal extends React.Component {
   }
 
   confirm(product, productAmount) {
-    const { onConfirm } = this.props;
+    const { onAdd, onEdit, mode } = this.props;
     this.setState({
       amount: 0,
     });
-    onConfirm(product, productAmount);
+    if (mode === 'add') {
+      onAdd(product, productAmount);
+    } else {
+      onEdit(product, productAmount);
+    }
+  }
+
+  remove(product) {
+    const { onRemove } = this.props;
+    this.setState({
+      amount: 0,
+    });
+    onRemove(product);
   }
 
   render() {
     const {
       product,
       open,
+      mode,
       onClose,
     } = this.props;
 
@@ -43,9 +65,17 @@ class AddToCartModal extends React.Component {
         show={open}
         onClose={() => { onClose(); }}
       >
-        <p>Cuantas unidades deseas agregar al carrito?</p>
-        {product
-          && (
+        <header>
+          <h2>{product.name}</h2>
+        </header>
+        <section className="modal-body">
+          <p>
+            {
+            mode === 'add'
+              ? '¿Cuántas unidades deseas agregar al carrito?'
+              : `Hay ${product.amount} unidades de este producto en tu carrito. Puedes editar la cantidad.`
+            }
+          </p>
           <p>
             Actualmente hay
             {' '}
@@ -53,28 +83,41 @@ class AddToCartModal extends React.Component {
             {' '}
             en stock.
           </p>
-          )
+          <input
+            className="amount-input"
+            type="number"
+            name="amount"
+            id="amount"
+            min={0}
+            max={product.quantity || 0}
+            step={1}
+            value={amount}
+            onChange={(e) => { this.updateAmount(parseInt(e.target.value, 10)); }}
+          />
+        </section>
+        <footer className="modal-footer">
+          { mode === 'remove'
+            && (
+            <button
+              type="button"
+              title="Eliminar producto"
+              className="remove-button"
+              onClick={() => { this.remove(product); }}
+            >
+                  Eliminar producto
+            </button>
+            )
         }
-        <input
-          className="amount-input"
-          type="number"
-          name="amount"
-          id="amount"
-          min={0}
-          max={product ? product.quantity : 0}
-          step={1}
-          value={amount}
-          onChange={(e) => { this.updateAmount(e.target.value); }}
-        />
-        <button
-          type="button"
-          title="Confirmar cantidad"
-          className="confirm-button"
-          disabled={amount < 1 || amount > product.quantity}
-          onClick={() => { this.confirm(product, amount); }}
-        >
-        Agregar al carrito
-        </button>
+          <button
+            type="button"
+            title={mode === 'add' ? 'Agregar al carrito' : 'Confirmar'}
+            className="confirm-button"
+            disabled={amount < 1 || amount > product.quantity}
+            onClick={() => { this.confirm(product, amount); }}
+          >
+            {mode === 'add' ? 'Agregar al carrito' : 'Confirmar'}
+          </button>
+        </footer>
       </Modal>
     );
   }
@@ -82,14 +125,16 @@ class AddToCartModal extends React.Component {
 
 AddToCartModal.propTypes = {
   open: PropTypes.bool,
-  product: PropTypes.object,
+  product: PropTypes.object.isRequired,
+  mode: PropTypes.oneOf(['add', 'edit']).isRequired,
   onClose: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 AddToCartModal.defaultProps = {
   open: false,
-  product: null,
 };
 
 export default AddToCartModal;

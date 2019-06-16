@@ -8,7 +8,7 @@ import Filters from './shared/filters/Filters';
 import AddToCartModal from './add-to-cart-modal/AddToCartModal';
 
 import {
-  getProducts, getCategories, addToCart, getCart, removeFromCart, buyCartProducts,
+  getProducts, getCategories, addToCart, getCart, removeFromCart, buyCartProducts, editInCart,
 } from '../services/store-service';
 
 const STORE_VIEW_ID = 'store';
@@ -41,6 +41,7 @@ class App extends React.Component {
       addToCartModal: {
         show: false,
         product: null,
+        mode: null,
       },
     };
     this.changeView = this.changeView.bind(this);
@@ -52,6 +53,7 @@ class App extends React.Component {
     this.buyProductsInCart = this.buyProductsInCart.bind(this);
     this.openAddToCartModal = this.openAddToCartModal.bind(this);
     this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
+    this.editProductInCart = this.editProductInCart.bind(this);
   }
 
   // Fetch categories and products
@@ -110,7 +112,7 @@ class App extends React.Component {
   }
 
   addProductToCart(product, amount) {
-    addToCart(product).then(() => {
+    addToCart(product, amount).then(() => {
       const { cart } = this.state;
       this.setState({
         cart: [...cart, {
@@ -125,6 +127,27 @@ class App extends React.Component {
     });
   }
 
+  editProductInCart(product, amount) {
+    editInCart(product.id, amount).then(() => {
+      const { cart } = this.state;
+      const modifiedCart = cart.map((p) => {
+        if (p.id === product.id) {
+          return {
+            ...p,
+            amount,
+          };
+        }
+        return p;
+      });
+      this.setState({
+        cart: modifiedCart,
+        addToCartModal: {
+          show: false,
+        },
+      });
+    });
+  }
+
   removeProductFromCart(product) {
     const productId = product.id;
     removeFromCart(product.id).then(() => {
@@ -132,6 +155,9 @@ class App extends React.Component {
       const cartWithoutProduct = cart.filter(p => p.id !== productId);
       this.setState({
         cart: cartWithoutProduct,
+        addToCartModal: {
+          show: false,
+        },
       });
     }, () => {
       console.log('Error: product could not be removed.');
@@ -147,13 +173,16 @@ class App extends React.Component {
     });
   }
 
-  openAddToCartModal(product) {
-    this.setState({
-      addToCartModal: {
-        product,
-        show: true,
-      },
-    });
+  openAddToCartModal(mode) {
+    return (product) => {
+      this.setState({
+        addToCartModal: {
+          product,
+          mode,
+          show: true,
+        },
+      });
+    };
   }
 
   closeAddToCartModal() {
@@ -161,6 +190,7 @@ class App extends React.Component {
       addToCartModal: {
         product: null,
         show: false,
+        mode: null,
       },
     });
   }
@@ -210,7 +240,7 @@ class App extends React.Component {
         return isAFirst ? -1 : 1;
       });
 
-    const { show: showAddToCartModal, product: selectedProduct } = addToCartModal;
+    const { show: showAddToCartModal, product: selectedProduct, mode } = addToCartModal;
     const { currentView } = this.state;
 
     return (
@@ -232,7 +262,7 @@ class App extends React.Component {
             sort={sort}
             onFilterValueChange={this.updateFilterValue}
             onSortValueUpdate={this.updateSortValue}
-            onAddToCart={this.openAddToCartModal}
+            onAddToCart={this.openAddToCartModal('add')}
             onPageUpdate={this.updatePage}
           />
           )
@@ -242,7 +272,7 @@ class App extends React.Component {
           && (
           <Cart
             cart={cart}
-            onProductRemove={this.removeProductFromCart}
+            onProductEdit={this.openAddToCartModal('remove')}
             onBuy={this.buyProductsInCart}
           />
           )
@@ -257,12 +287,22 @@ class App extends React.Component {
           />
           )
         }
-        <AddToCartModal
-          open={showAddToCartModal}
-          product={selectedProduct}
-          onClose={this.closeAddToCartModal}
-          onConfirm={this.addProductToCart}
-        />
+        {
+          showAddToCartModal
+          && selectedProduct
+          && (
+          <AddToCartModal
+            open={showAddToCartModal}
+            product={selectedProduct}
+            onClose={this.closeAddToCartModal}
+            onAdd={this.addProductToCart}
+            onEdit={this.editProductInCart}
+            onRemove={this.removeProductFromCart}
+            mode={mode}
+          />
+          )
+
+        }
       </div>
     );
   }
