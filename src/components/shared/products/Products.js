@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PlusCircle, CheckCircle, XCircle } from 'react-feather';
+import { PlusCircle, CheckCircle, Edit } from 'react-feather';
 
 import './Products.css';
 
@@ -22,14 +22,14 @@ const Products = (props) => {
             ? (
               <button
                 type="button"
-                className={`cart-state ${actionIcon}`}
-                title="Add to cart"
+                className="cart-state action"
+                title={actionIcon === 'add' ? 'Agregar al carrito' : 'Editar producto'}
                 onClick={() => onAction(product)}
               >
                 {
               actionIcon === 'add'
                 ? <PlusCircle size={36} />
-                : <XCircle size={36} />
+                : <Edit size={36} />
             }
               </button>
             )
@@ -56,6 +56,13 @@ const Products = (props) => {
               <h3 className="product-price">
                 {product.price.toLocaleString('en', { style: 'currency', currency: 'USD' })}
               </h3>
+              {product.amount && (
+              <p className="product-amount">
+                <b>{product.amount}</b>
+                {' '}
+                en el carrito
+              </p>
+              ) }
               <div className="product-details">
                 <p className={`product-availability ${product.available ? '' : 'not-available'}`}>
                   {product.available ? 'Disponible' : 'No disponible'}
