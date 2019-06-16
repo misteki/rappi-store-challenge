@@ -2,13 +2,13 @@
   padding: 24px;
 }
 
-.cart-products {
+.cart__products {
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
 }
 
-.cart-footer {
+.cart__footer {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -33,7 +33,7 @@
   box-shadow: none;
 }
 
-.total-price {
+.cart__grand-total {
   text-align: center;
   margin: 0.5em;
 }

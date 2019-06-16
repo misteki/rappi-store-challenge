@@ -52,22 +52,22 @@ const Products = (props) => {
               {
                 actionButton(product)
               }
-              <h2 className="product-name">{product.name}</h2>
-              <h3 className="product-price">
+              <h2 className="product-list-item__name">{product.name}</h2>
+              <h3 className="product-list-item__price">
                 {product.price.toLocaleString('en', { style: 'currency', currency: 'USD' })}
               </h3>
               {product.amount && (
-              <p className="product-amount">
+              <p className="product-list-item__amount">
                 <b>{product.amount}</b>
                 {' '}
                 en el carrito
               </p>
               ) }
-              <div className="product-details">
-                <p className={`product-availability ${product.available ? '' : 'not-available'}`}>
+              <div className="product-list-item__details">
+                <p className={`product-list_item__availability ${product.available ? '' : 'product-list_item__availability_not-available'}`}>
                   {product.available ? 'Disponible' : 'No disponible'}
                 </p>
-                <p className="product-quantity">{`${product.quantity} en stock`}</p>
+                <p className="product-list_item__quantity">{`${product.quantity} en stock`}</p>
               </div>
             </li>
           ))

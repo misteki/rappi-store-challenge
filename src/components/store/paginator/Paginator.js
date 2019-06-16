@@ -37,7 +37,7 @@ const Paginator = (props) => {
              [...Array(pages)].map((page, pageIndex) => (
                <button
                  type="button"
-                 className={`paginator-button ${pageIndex === currentPage ? 'selected' : ''}`}
+                 className={`${pageIndex === currentPage ? 'paginator__button_selected' : 'paginator__button'}`}
                  onClick={() => { changePage(pageIndex); }}
                  key={shortid.generate()}
                >

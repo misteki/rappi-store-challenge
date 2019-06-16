@@ -1,4 +1,4 @@
-.filter-name {
+.filters__filter-name {
   background-color: var(--color-primary);
   margin: 0;
   padding: 0.3em 2em 0.3em 0.5em;
@@ -16,59 +16,55 @@
   font-size: 12px;
 }
 
-.category-list.first-level {
+.category-list_first-level {
   padding: 0 2em;
 }
 
-.category-list.sublevel {
+.category-list_sublevel {
   border-left: 1px solid var(--color-gray);
 }
 
-.category-list-item {
+.category-list__item {
   color: var(--color-complementary);
   cursor: pointer;
   font-weight: 400;
-}
-
-.category-list-item.selected {
-  font-weight: 900;
 }
 
 .category-list:not(:last-child) {
   margin-bottom: 1.5em;
 }
 
-.category-list-item:not(:last-child) {
+.category-list__item:not(:last-child) {
   margin-bottom: 0.5em;
 }
 
-.category-list-item .selected {
+.category-list__button_selected {
   font-weight: 800;
 }
 
-.filter-controls {
+.filters__filter-controls {
   margin-bottom: 1.5em;
 }
 
-.filter-checkbox {
+.filters__filter-checkbox {
   display: flex;
 }
 
-.filter-controls label{
+.filters__filter-controls label{
   display: block;
 }
 
-.filter-controls input {
+.filters__filter-controls input {
   display: block;
   margin-bottom: 1em;
 }
 
-.filter-controls input[type='number'], .filter-controls input[type='text']{
+.filters__filter-controls input[type='number'], .filters__filter-controls input[type='text']{
   width: 90%;
   margin-top: 4px;
 }
 
-.filter-controls input[type='checkbox']{
+.filters__filter-controls input[type='checkbox']{
   margin-right: 0.5em;
 }
 
@@ -78,7 +74,7 @@
     font-size: 18px;
   }
 
-  .filter-controls {
+  .filters__filter-controls {
     padding: 0 2em;
   }
 
@@ -86,15 +82,15 @@
     font-size: 16px;
   }
 
-  .category-list-item {
+  .category-list__item {
     padding: 0.3em 0;
   }
 
-  .category-list.first-level {
+  .category-list_first-level {
     padding: 0em;
   }
 
-  .filter-controls input[type='number'], .filter-controls input[type='text']{
+  .filters__filter-controls input[type='number'], .filters__filter-controls input[type='text']{
     font-size: 18px;
     height: 2em;
   }

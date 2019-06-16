@@ -34,7 +34,7 @@ const Store = (props) => {
   return (
     <React.Fragment>
       <main className="store">
-        <aside className="filters-panel">
+        <aside className="store__filters">
           <Filters
             categories={categories}
             onFilterValueChange={(filterId, value) => { onFilterValueChange(filterId, value); }}
@@ -42,7 +42,7 @@ const Store = (props) => {
           />
         </aside>
 
-        <section className="products" role="main">
+        <section className="store__products" role="main">
           <ControlsBar
             sortAttribute={attribute}
             ascendingOrder={isAscending}

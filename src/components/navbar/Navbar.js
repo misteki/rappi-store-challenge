@@ -12,14 +12,19 @@ const Navbar = (props) => {
 
   return (
     <header className="navbar">
-      <h1 className="navbar-title">
+      <h1 className="navbar__title">
         {title}
       </h1>
-      <nav className="link-buttons">
+      <nav className="navbar__nav">
         {
         view !== 'store'
         && (
-        <button type="button" title="Back to the store" className="view-button store-link" onClick={() => { onViewChange('store'); }}>
+        <button
+          type="button"
+          title="Back to the store"
+          className="navbar__link-button navbar__link-button_store"
+          onClick={() => { onViewChange('store'); }}
+        >
           <List size={20} />
         </button>
         )
@@ -27,7 +32,12 @@ const Navbar = (props) => {
         {
         view !== 'cart'
         && (
-        <button type="button" title="See your cart" className="view-button cart-link" onClick={() => { onViewChange('cart'); }}>
+        <button
+          type="button"
+          title="See your cart"
+          className="navbar__link-button navbar__link-button_cart"
+          onClick={() => { onViewChange('cart'); }}
+        >
           <ShoppingCart cart={30} />
         </button>
         )
@@ -35,7 +45,12 @@ const Navbar = (props) => {
         {
         view !== 'filters'
         && (
-        <button type="button" title="See filters" className="view-button mobile-hide filters-link" onClick={() => { onViewChange('filters'); }}>
+        <button
+          type="button"
+          title="See filters"
+          className="navbar__link-button navbar__link-button_filters"
+          onClick={() => { onViewChange('filters'); }}
+        >
           <Filter cart={30} />
         </button>
         )

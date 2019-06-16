@@ -12,18 +12,18 @@ const Cart = (props) => {
     onBuy,
   } = props;
 
-  const totalPrice = cart.reduce((acc, product) => { console.log(product.price, product.amount); return acc + product.price * product.amount ;}, 0);
+  const totalPrice = cart.reduce((acc, product) => acc + product.price * product.amount, 0);
 
   return (
     <main className="cart">
       <header>
-        <h2 className="total-price">
+        <h2 className="cart__grand-total">
         Total general:
           {' '}
           {totalPrice.toLocaleString('en', { style: 'currency', currency: 'USD' })}
         </h2>
       </header>
-      <section className="cart-products" role="main">
+      <section className="cart__products" role="main">
         <Products
           products={cart}
           onAction={onProductEdit}
@@ -31,7 +31,7 @@ const Cart = (props) => {
           actionIcon="remove"
         />
       </section>
-      <footer className="cart-footer">
+      <footer className="cart__footer">
         {
             cart.length > 0
             && <button type="button" title="Comprar!" className="buy-button" onClick={() => { onBuy(); }}>Comprar!</button>

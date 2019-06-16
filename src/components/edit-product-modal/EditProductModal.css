@@ -1,4 +1,4 @@
-.edit-product-modal-container {
+.edit-product-modal {
   background-color: rgba(0,0,0,0.2);
   padding: 24px !important;
   border: 1px solid var(--color-gray);
@@ -7,13 +7,13 @@
   width: 280px !important;
 }
 
-.amount-input {
+.edit-product-modal__amount_input {
   font-size: 14px;
   padding: 0 4px;
   width: calc(100% - 4px);
 }
 
-.confirm-button {
+.edit-product-modal__confirm-button {
   margin: 1em;
   font-weight: bold;
   padding: 0.5em;
@@ -23,12 +23,12 @@
   border-radius: 4px;
 }
 
-.confirm-button:disabled {
+.edit-product-modal__confirm-button:disabled {
   border: 1px solid var(--color-gray);
   color: var(--color-gray);
 }
 
-.remove-button {
+.edit-product-modal__cancel-button {
   margin: 1em;
   font-weight: bold;
   padding: 0.5em;
@@ -38,7 +38,7 @@
   border-radius: 4px;
 }
 
-.modal-footer {
+.edit-product-modal__footer {
   margin-top: 1em;
   display: flex;
   align-items: center;
