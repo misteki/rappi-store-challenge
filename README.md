@@ -24,6 +24,7 @@ The project requirements were specified as an assignment in an document file. Du
 For anyone taking a more in-depth look at the app's overall design and code, it might be worth it to explain some of the choices made for the app. 
 
 From a UI/UX standpoint:
+
 - Considering the small scope and size of the app (and to keep it that way), a reponsive library was not used. Instead, responsiveness was enforced by using only CSS media queries and  a single width breakpoint (`1024px`); everything under that width is considered mobile and styled as such. The idea, besides not bringing any heavy dependencies, is that the simplicity of the app as requested should be accompanied by a similarly simple implementation of responsiveness, and this is enough to ensure it looks properly accross devices.
 - Since it was not explicitly requested and it is not strictly necessary, user alerts for successful or failing asynchronous operations (like removing a product form the cart or buying them) were not added. If desired, I'd probably do it via a snackbar component that informs of the status of this operations. Right now, the UI changes communicate these things.
 - The size of the paginator was not capped, due to the fact that there'll only be a limited, small amount of product entries. For actrual data, is most definitely should have a fixed maximum size of pages to be displayed.
@@ -31,6 +32,7 @@ From a UI/UX standpoint:
 - Generally speaking, several improvements can be made to embellish and polish the general look and feel of the app; but it is understood that that is not the main focus on the excercise, and thus it was skipped to favor sooner delivery.
 
 In the code side of things:
+
 - The idea was to keep the app as small as possible in terms of dependencies, being it a pretty straightforward thing. The `create-react-app` tool was used for convenience, and it has several dependencies on its own, but the idea was to try to install as few extra packages as possible.
 - It's in that vein that, considering there are as mnuch as three distinct views (products, filters, and cart), routing was not added to the app, choosing instead to interchange components based on a view id parameter at the root app level.
 - Also, Redux (or any other state management library) was not added due to the size of the app. The state was instead concentrated on a root component (App, in this case), as well as the functions to mutate it. It mostly only flows down from it to children functional components. Redux might be desirable if the app was bigger and was designed like this one is, but I think it is not justified for its current size.
