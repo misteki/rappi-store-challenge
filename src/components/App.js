@@ -5,7 +5,7 @@ import Navbar from './navbar/Navbar';
 import Store from './store/Store';
 import Cart from './cart/Cart';
 import Filters from './shared/filters/Filters';
-import AddToCartModal from './add-to-cart-modal/AddToCartModal';
+import EditProductModal from './edit-product-modal/EditProductModal';
 
 import {
   getProducts, getCategories, addToCart, getCart, removeFromCart, buyCartProducts, editInCart,
@@ -51,8 +51,8 @@ class App extends React.Component {
     this.addProductToCart = this.addProductToCart.bind(this);
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.buyProductsInCart = this.buyProductsInCart.bind(this);
-    this.openAddToCartModal = this.openAddToCartModal.bind(this);
-    this.closeAddToCartModal = this.closeAddToCartModal.bind(this);
+    this.openEditProductModal = this.openEditProductModal.bind(this);
+    this.closeEditProductModal = this.closeEditProductModal.bind(this);
     this.editProductInCart = this.editProductInCart.bind(this);
   }
 
@@ -85,11 +85,13 @@ class App extends React.Component {
 
   updateFilterValue(filterId, value) {
     const { filters } = this.state;
+    const searchedName = filterId === 'name' ? value : filters.name;
     this.setState({
       currentProductPage: 0,
       filters: {
         ...filters,
         [filterId]: value,
+        name: filterId === 'category' ? undefined : searchedName,
       },
     });
   }
@@ -173,7 +175,7 @@ class App extends React.Component {
     });
   }
 
-  openAddToCartModal(mode) {
+  openEditProductModal(mode) {
     return (product) => {
       this.setState({
         addToCartModal: {
@@ -185,7 +187,7 @@ class App extends React.Component {
     };
   }
 
-  closeAddToCartModal() {
+  closeEditProductModal() {
     this.setState({
       addToCartModal: {
         product: null,
@@ -240,7 +242,7 @@ class App extends React.Component {
         return isAFirst ? -1 : 1;
       });
 
-    const { show: showAddToCartModal, product: selectedProduct, mode } = addToCartModal;
+    const { show: showEditProductModal, product: selectedProduct, mode } = addToCartModal;
     const { currentView } = this.state;
 
     return (
@@ -262,7 +264,7 @@ class App extends React.Component {
             sort={sort}
             onFilterValueChange={this.updateFilterValue}
             onSortValueUpdate={this.updateSortValue}
-            onAddToCart={this.openAddToCartModal('add')}
+            onAddToCart={this.openEditProductModal('add')}
             onPageUpdate={this.updatePage}
           />
           )
@@ -272,7 +274,7 @@ class App extends React.Component {
           && (
           <Cart
             cart={cart}
-            onProductEdit={this.openAddToCartModal('remove')}
+            onProductEdit={this.openEditProductModal('remove')}
             onBuy={this.buyProductsInCart}
           />
           )
@@ -288,13 +290,13 @@ class App extends React.Component {
           )
         }
         {
-          showAddToCartModal
+          showEditProductModal
           && selectedProduct
           && (
-          <AddToCartModal
-            open={showAddToCartModal}
+          <EditProductModal
+            open={showEditProductModal}
             product={selectedProduct}
-            onClose={this.closeAddToCartModal}
+            onClose={this.closeEditProductModal}
             onAdd={this.addProductToCart}
             onEdit={this.editProductInCart}
             onRemove={this.removeProductFromCart}

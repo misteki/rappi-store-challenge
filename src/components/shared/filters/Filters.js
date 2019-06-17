@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { XCircle } from 'react-feather';
 
 import './Filters.css';
 
@@ -25,13 +26,13 @@ const Filters = (props) => {
     || (category.sublevels && category.sublevels.some(c => isSublevelSelected(c)));
 
   const categoriesList = (levelCategories, isParent) => (
-    <ul className={`category-list ${isParent ? 'first-level' : 'sublevel'}`}>
+    <ul className={`category-list ${isParent ? 'category-list_first-level' : 'category-list_sublevel'}`}>
       {levelCategories.map(category => (
         <React.Fragment key={category.id}>
-          <li className="category-list-item">
+          <li className="category-list__item">
             <button
               type="button"
-              className={isCategorySelected(category.id) ? 'category-button selected' : 'ategory-button-item'}
+              className={isCategorySelected(category.id) ? 'category-list__button_selected' : 'category-list__button'}
               onClick={() => { onFilterValueChange('category', category); }}
             >
               {category.name}
@@ -39,7 +40,7 @@ const Filters = (props) => {
           </li>
           {
             category.sublevels && isSublevelSelected(category)
-            && <li className="category-list-item">{ categoriesList(category.sublevels, false) }</li>
+            && <li className="category-list__item">{ categoriesList(category.sublevels, false) }</li>
           }
         </React.Fragment>
       ))}
@@ -53,26 +54,47 @@ const Filters = (props) => {
 
   return (
     <div className="filters">
-      <h3 className="filter-name"> Categorías </h3>
-      <div className="filter-controls">
+      <h3 className="filters__filter-name">
+        Categorías
+        {
+          selectedCategory
+          && (
+            <button
+              type="button"
+              className="filters__clear-category"
+              onClick={() => { onFilterValueChange('category', null); }}
+            >
+              <XCircle size={14} />
+            </button>
+          )
+        }
+      </h3>
+      <div className="filters__filter-controls">
         {categoriesList(categories, true)}
       </div>
-      <h3 className="filter-name"> Nombre </h3>
-      <div className="filter-controls">
-        <label htmlFor="search-name">
+      {
+        selectedCategory && !selectedCategory.sublevels
+        && (
+        <React.Fragment>
+          <h3 className="filters__filter-name"> Nombre </h3>
+          <div className="filters__filter-controls">
+            <label htmlFor="search-name">
           Búsqueda
-        </label>
-        <input
-          type="text"
-          name="search-name"
-          id="search-name"
-          value={name}
-          onChange={(e) => { onFilterValueChange('name', e.target.value); }}
-        />
-      </div>
-      <h3 className="filter-name"> Disponibilidad </h3>
-      <div className="filter-controls">
-        <div className="filter-checkbox">
+            </label>
+            <input
+              type="text"
+              name="search-name"
+              id="search-name"
+              value={name}
+              onChange={(e) => { onFilterValueChange('name', e.target.value); }}
+            />
+          </div>
+        </React.Fragment>
+        )
+      }
+      <h3 className="filters__filter-name"> Disponibilidad </h3>
+      <div className="filters__filter-controls">
+        <div className="filters__filter-checkbox">
           <input
             type="checkbox"
             name="available"
@@ -82,7 +104,7 @@ const Filters = (props) => {
           />
           <label htmlFor="checkbox-available">Disponible</label>
         </div>
-        <div className="filter-checkbox">
+        <div className="filters__filter-checkbox">
           <input
             type="checkbox"
             name="no-available"
@@ -93,8 +115,8 @@ const Filters = (props) => {
           <label htmlFor="checkbox-no-available">No disponible</label>
         </div>
       </div>
-      <h3 className="filter-name"> Stock </h3>
-      <div className="filter-controls">
+      <h3 className="filters__filter-name"> Stock </h3>
+      <div className="filters__filter-controls">
         <label htmlFor="stock-min">Mínimo</label>
         <input
           type="number"
@@ -116,8 +138,8 @@ const Filters = (props) => {
           onChange={(e) => { onNumberValueChange('maxStock', parseInt(e.target.value, 10)); }}
         />
       </div>
-      <h3 className="filter-name"> Precios </h3>
-      <div className="filter-controls">
+      <h3 className="filters__filter-name"> Precios </h3>
+      <div className="filters__filter-controls">
         <label htmlFor="price-min">Mínimo</label>
         <input
           type="number"

@@ -2,9 +2,9 @@ import React from 'react';
 import Modal from 'simple-react-modal';
 import PropTypes from 'prop-types';
 
-import './AddToCartModal.css';
+import './EditProductModal.css';
 
-class AddToCartModal extends React.Component {
+class EditProductModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,7 +60,7 @@ class AddToCartModal extends React.Component {
 
     return (
       <Modal
-        containerClassName="edit-product-modal-container"
+        containerClassName="edit-product-modal"
         closeOnOuterClick
         show={open}
         onClose={() => { onClose(); }}
@@ -68,7 +68,7 @@ class AddToCartModal extends React.Component {
         <header>
           <h2>{product.name}</h2>
         </header>
-        <section className="modal-body">
+        <section className="edit-product-modal__body">
           <p>
             {
             mode === 'add'
@@ -84,7 +84,7 @@ class AddToCartModal extends React.Component {
             en stock.
           </p>
           <input
-            className="amount-input"
+            className="edit-product-modal__amount_input"
             type="number"
             name="amount"
             id="amount"
@@ -95,13 +95,13 @@ class AddToCartModal extends React.Component {
             onChange={(e) => { this.updateAmount(parseInt(e.target.value, 10)); }}
           />
         </section>
-        <footer className="modal-footer">
+        <footer className="edit-product-modal__footer">
           { mode === 'remove'
             && (
             <button
               type="button"
               title="Eliminar producto"
-              className="remove-button"
+              className="edit-product-modal-button edit-product-modal-button_cancel"
               onClick={() => { this.remove(product); }}
             >
                   Eliminar producto
@@ -111,7 +111,7 @@ class AddToCartModal extends React.Component {
           <button
             type="button"
             title={mode === 'add' ? 'Agregar al carrito' : 'Confirmar'}
-            className="confirm-button"
+            className="edit-product-modal-button edit-product-modal-button_confirm"
             disabled={amount < 1 || amount > product.quantity}
             onClick={() => { this.confirm(product, amount); }}
           >
@@ -123,7 +123,7 @@ class AddToCartModal extends React.Component {
   }
 }
 
-AddToCartModal.propTypes = {
+EditProductModal.propTypes = {
   open: PropTypes.bool,
   product: PropTypes.object.isRequired,
   mode: PropTypes.oneOf(['add', 'edit']).isRequired,
@@ -133,8 +133,8 @@ AddToCartModal.propTypes = {
   onEdit: PropTypes.func.isRequired,
 };
 
-AddToCartModal.defaultProps = {
+EditProductModal.defaultProps = {
   open: false,
 };
 
-export default AddToCartModal;
+export default EditProductModal;

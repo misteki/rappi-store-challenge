@@ -28,6 +28,11 @@ input[type='number'], input[type='text']{
   border-radius: 4px;
 }
 
+button, button svg {
+	transition: all 200ms ease;
+  transition-property: box-shadow, background-color, color, fill, stroke;
+}
+
 @media (max-width: 1023px) {
 
   input[type='number'], input[type='text']{
