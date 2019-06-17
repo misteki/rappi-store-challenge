@@ -20,7 +20,7 @@
   padding: 0 0.3em;
 }
 
-.paginator-button_selected {
+.paginator__button_selected {
   font-weight: bolder;
   color: var(--color-complementary);
   border-bottom: 1px solid var(--color-complementary);

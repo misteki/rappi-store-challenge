@@ -85,11 +85,13 @@ class App extends React.Component {
 
   updateFilterValue(filterId, value) {
     const { filters } = this.state;
+    const searchedName = filterId === 'name' ? value : filters.name;
     this.setState({
       currentProductPage: 0,
       filters: {
         ...filters,
         [filterId]: value,
+        name: filterId === 'category' ? undefined : searchedName,
       },
     });
   }

@@ -101,7 +101,7 @@ class EditProductModal extends React.Component {
             <button
               type="button"
               title="Eliminar producto"
-              className="edit-product-modal__cancel-button"
+              className="edit-product-modal-button edit-product-modal-button_cancel"
               onClick={() => { this.remove(product); }}
             >
                   Eliminar producto
@@ -111,7 +111,7 @@ class EditProductModal extends React.Component {
           <button
             type="button"
             title={mode === 'add' ? 'Agregar al carrito' : 'Confirmar'}
-            className="edit-product-modal__confirm-button"
+            className="edit-product-modal-button edit-product-modal-button_confirm"
             disabled={amount < 1 || amount > product.quantity}
             onClick={() => { this.confirm(product, amount); }}
           >

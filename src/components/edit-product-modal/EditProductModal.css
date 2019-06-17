@@ -13,29 +13,37 @@
   width: calc(100% - 4px);
 }
 
-.edit-product-modal__confirm-button {
+.edit-product-modal-button {
   margin: 1em;
   font-weight: bold;
   padding: 0.5em;
-  border: 1px solid var(--color-complementary);
-  color: var(--color-complementary);
   box-shadow: 0px 2px 3px 0px var(--color-gray);
   border-radius: 4px;
 }
 
-.edit-product-modal__confirm-button:disabled {
+.edit-product-modal-button_confirm {
+  border: 1px solid var(--color-complementary);
+  color: var(--color-complementary);
+}
+
+.edit-product-modal-button_confirm:hover {
+  background-color: var(--color-complementary);
+  color: var(--color-light);
+}
+
+.edit-product-modal-button_confirm:disabled {
   border: 1px solid var(--color-gray);
   color: var(--color-gray);
 }
 
-.edit-product-modal__cancel-button {
-  margin: 1em;
-  font-weight: bold;
-  padding: 0.5em;
+.edit-product-modal-button_cancel {
   border: 1px solid var(--color-accent);
   color: var(--color-accent);
-  box-shadow: 0px 2px 3px 0px var(--color-gray);
-  border-radius: 4px;
+}
+
+.edit-product-modal-button_cancel:hover {
+  background-color: var(--color-accent);
+  color: var(--color-light);
 }
 
 .edit-product-modal__footer {

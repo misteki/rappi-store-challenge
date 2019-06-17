@@ -9,6 +9,10 @@
   padding-top: 1em;
 }
 
+.filters__clear-category {
+  margin: 0 8px;
+}
+
 .category-list {
   margin: 0;
   padding-inline-start: 1em;

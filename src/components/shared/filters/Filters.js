@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { XCircle } from 'react-feather';
 
 import './Filters.css';
 
@@ -53,23 +54,44 @@ const Filters = (props) => {
 
   return (
     <div className="filters">
-      <h3 className="filters__filter-name"> Categorías </h3>
+      <h3 className="filters__filter-name">
+        Categorías
+        {
+          selectedCategory
+          && (
+            <button
+              type="button"
+              className="filters__clear-category"
+              onClick={() => { onFilterValueChange('category', null); }}
+            >
+              <XCircle size={14} />
+            </button>
+          )
+        }
+      </h3>
       <div className="filters__filter-controls">
         {categoriesList(categories, true)}
       </div>
-      <h3 className="filters__filter-name"> Nombre </h3>
-      <div className="filters__filter-controls">
-        <label htmlFor="search-name">
+      {
+        selectedCategory && !selectedCategory.sublevels
+        && (
+        <React.Fragment>
+          <h3 className="filters__filter-name"> Nombre </h3>
+          <div className="filters__filter-controls">
+            <label htmlFor="search-name">
           Búsqueda
-        </label>
-        <input
-          type="text"
-          name="search-name"
-          id="search-name"
-          value={name}
-          onChange={(e) => { onFilterValueChange('name', e.target.value); }}
-        />
-      </div>
+            </label>
+            <input
+              type="text"
+              name="search-name"
+              id="search-name"
+              value={name}
+              onChange={(e) => { onFilterValueChange('name', e.target.value); }}
+            />
+          </div>
+        </React.Fragment>
+        )
+      }
       <h3 className="filters__filter-name"> Disponibilidad </h3>
       <div className="filters__filter-controls">
         <div className="filters__filter-checkbox">
